@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-    <Router basename={"/Dispatch-Frontend"}>
+    <Router basename={"/Dispatch"}>
         <React.StrictMode>
             <App />
         </React.StrictMode>
