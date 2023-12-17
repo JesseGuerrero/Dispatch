@@ -15,6 +15,8 @@
 ### 2. Design full frontend in this order
 - Home
 - Login (With backend, unlock different header when logged in)
+    - Create check session, https://chat.openai.com/share/4126b409-14a1-41a8-8122-08ae894d26b2
+    - Session invalid, redirect to login
 - Register (With backend)
 - Logout (With backend)
 - Forgot Password (Empty endpoints)
