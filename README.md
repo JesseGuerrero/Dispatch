@@ -20,9 +20,9 @@
 - Forgot Password (Empty endpoints)
 - Broadcast (Empty endpoints)
     - Send by tag and username (Empty endpoints)
-- Settings (Empty endpoints)
+- Settings (Empty endpoints) <br>
   ![Settings](https://i.imgur.com/7pQwyuk.png)
-- Temp (Empty endpoints)
+- Temp (Empty endpoints) <br>
   ![Temp](https://i.imgur.com/8hmCWqB.png)
 
 **--Add endpoints and security to all the above**
