@@ -6,6 +6,7 @@ import SidebarLayout from 'src/layouts/SidebarLayout';
 import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
+import SignupPage from "src/content/pages/auth/Signup.page";
 
 const Loader = (Component) => (props) =>
   (
@@ -17,6 +18,7 @@ const Loader = (Component) => (props) =>
 // Pages
 
 const Overview = Loader(lazy(() => import('src/content/overview')));
+const LoginPage = Loader(lazy(() => import('src/content/pages/auth/login.page')));
 
 // Dashboards
 
@@ -84,6 +86,14 @@ const routes: RouteObject[] = [
       {
         path: '/',
         element: <Overview />
+      },
+      {
+        path:'login',
+        element: <LoginPage />
+      },
+      {
+        path: 'signup',
+        element: <SignupPage />
       },
       {
         path: 'overview',
