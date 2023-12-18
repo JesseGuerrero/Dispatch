@@ -1,20 +1,22 @@
-import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import Header from './components/Header'
-import Home from './components/Home';
-import About from './components/About';
+import { useRoutes } from 'react-router-dom';
+import router from 'src/router';
+
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+
+import { CssBaseline } from '@mui/material';
+import ThemeProvider from './theme/ThemeProvider';
 
 function App() {
-  return (
-      <div>
-        <Header />
+  const content = useRoutes(router);
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </div>
+  return (
+    <ThemeProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <CssBaseline />
+        {content}
+      </LocalizationProvider>
+    </ThemeProvider>
   );
 }
-
 export default App;
