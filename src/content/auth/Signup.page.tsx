@@ -4,10 +4,8 @@ import { FC } from 'react';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { object, string, TypeOf } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import FormInput from '../../../components/FormInput';
-import { ReactComponent as GoogleLogo } from '../../../assets/google.svg';
-import { ReactComponent as GitHubLogo } from '../../../assets/github.svg';
-import { LinkItem, OauthMuiLink } from './login.page';
+import FormInput from '../../components/FormInput';
+import { LinkItem } from './login.page';
 
 // 👇 SignUp Schema with Zod
 const signupSchema = object({
@@ -177,14 +175,6 @@ const SignupPage: FC = () => {
                     flexDirection='column'
                     sx={{ paddingLeft: { sm: '3rem' }, rowGap: '1rem' }}
                   >
-                    <OauthMuiLink href=''>
-                      <GoogleLogo style={{ height: '2rem' }} />
-                      Google
-                    </OauthMuiLink>
-                    <OauthMuiLink href=''>
-                      <GitHubLogo style={{ height: '2rem' }} />
-                      GitHub
-                    </OauthMuiLink>
                   </Box>
                 </Grid>
               </Grid>

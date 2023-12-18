@@ -255,7 +255,7 @@ function HeaderSearch() {
                     variant="body2"
                     sx={{
                       color: (theme: Theme) =>
-                        lighten(theme.palette.secondary.main, 0.5)
+                        lighten(theme.palette.background.default, 0.5)
                     }}
                   >
                     Choose if you would like to show or not this typography

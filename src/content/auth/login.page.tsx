@@ -7,7 +7,6 @@ import {
   Link as MuiLink,
   FormControlLabel,
   Checkbox,
-  Card
 } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { FC } from 'react';
@@ -15,8 +14,10 @@ import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { literal, object, string, TypeOf } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import FormInput from '../../../components/FormInput';
-import { styled } from '@mui/material/styles';
+import FormInput from '../../components/FormInput';
+import styled from '@emotion/styled';
+import { useTheme } from '@mui/material/styles';
+
 
 // 👇 Styled React Route Dom Link Component
 export const LinkItem = styled(Link)`
@@ -27,35 +28,6 @@ export const LinkItem = styled(Link)`
     color: #5ea1b6;
   }
 `;
-
-// 👇 Styled Material UI Link Component
-export const OauthMuiLink = styled(MuiLink)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f5f6f7;
-  border-radius: 1;
-  padding: 0.6rem 0;
-  column-gap: 1rem;
-  text-decoration: none;
-  color: #393e45;
-  font-weight: 500;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #fff;
-    box-shadow: 0 1px 13px 0 rgb(0 0 0 / 15%);
-  }
-`;
-
-const OverviewWrapper = styled(Box)(
-    () => `
-    overflow: auto;
-    flex: 1;
-    overflow-x: hidden;
-    align-items: center;
-`
-);
 
 // 👇 Login Schema with Zod
 const loginSchema = object({
@@ -70,7 +42,8 @@ const loginSchema = object({
 // 👇 Infer the Schema to get the TS Type
 type ILogin = TypeOf<typeof loginSchema>;
 
-function LoginPage() {
+const LoginPage: FC = () => {
+  const theme = useTheme();
   // 👇 Default Values
   const defaultValues: ILogin = {
     email: '',
@@ -90,13 +63,10 @@ function LoginPage() {
 
   // 👇 JSX to be rendered
   return (
-      <OverviewWrapper>
-
     <Container
       maxWidth={false}
-      sx={{ height: '100vh' }}
+      sx={{ height: '100vh'}}
     >
-      <Card>
       <Grid
         container
         justifyContent='center'
@@ -105,7 +75,7 @@ function LoginPage() {
       >
         <Grid
           item
-          sx={{ maxWidth: '70rem', width: '100%' }}
+          sx={{ maxWidth: '70rem', width: '100%', backgroundColor: theme.palette.background.paper}} /*Make this grid a background color from the theme. */
         >
           <FormProvider {...methods}>
             <Grid
@@ -120,8 +90,9 @@ function LoginPage() {
                 item
                 container
                 justifyContent='center'
+                rowSpacing={5}
                 sx={{
-                  maxWidth: { sm: '42rem' },
+                  maxWidth: { sm: '45rem' },
                   marginInline: 'auto',
                 }}
               >
@@ -216,9 +187,7 @@ function LoginPage() {
           </FormProvider>
         </Grid>
       </Grid>
-      </Card>
     </Container>
-      </OverviewWrapper>
   );
 };
 
