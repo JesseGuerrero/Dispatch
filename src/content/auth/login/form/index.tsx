@@ -1,78 +1,58 @@
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import {Box, Button, Checkbox, Container, FormControlLabel, Grid, Stack, Typography} from '@mui/material';
 
-import { Link as RouterLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { styled } from '@mui/material/styles';
+import {styled, useTheme} from '@mui/material/styles';
+import {FormProvider, SubmitHandler, useForm} from "react-hook-form";
+import FormInput from "../../../../components/FormInput";
+import LoadingButton from "@mui/lab/LoadingButton";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {literal, object, string, TypeOf} from "zod";
+import TextField from "@mui/material/TextField";
 
-const TypographyH1 = styled(Typography)(
-  ({ theme }) => `
-    font-size: ${theme.typography.pxToRem(50)};
-`
-);
+// 👇 Styled React Route Dom Link Component
+export const LinkItem = styled(Link)`
+  text-decoration: none;
+  color: #3683dc;
+  &:hover {
+    text-decoration: underline;
+    color: #5ea1b6;
+  }
+`;
 
-const TypographyH2 = styled(Typography)(
-  ({ theme }) => `
-    font-size: ${theme.typography.pxToRem(17)};
-`
-);
+// 👇 Login Schema with Zod
+const loginSchema = object({
+  email: string().min(1, 'Email is required').email('Email is invalid'),
+  password: string()
+      .min(1, 'Password is required')
+      .min(8, 'Password must be more than 8 characters')
+      .max(32, 'Password must be less than 32 characters'),
+  persistUser: literal(true).optional(),
+});
 
-const LabelWrapper = styled(Box)(
-  ({ theme }) => `
-    background-color: ${theme.colors.success.main};
-    color: ${theme.palette.success.contrastText};
-    font-weight: bold;
-    border-radius: 30px;
-    text-transform: uppercase;
-    display: inline-block;
-    font-size: ${theme.typography.pxToRem(11)};
-    padding: ${theme.spacing(0.5)} ${theme.spacing(1.5)};
-    margin-bottom: ${theme.spacing(2)};
-`
-);
-
-const MuiAvatar = styled(Box)(
-  ({ theme }) => `
-    width: ${theme.spacing(8)};
-    height: ${theme.spacing(8)};
-    border-radius: ${theme.general.borderRadius};
-    background-color: #e5f7ff;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto ${theme.spacing(2)};
-
-    img {
-      width: 60%;
-      height: 60%;
-      display: block;
-    }
-`
-);
-
-const TsAvatar = styled(Box)(
-  ({ theme }) => `
-    width: ${theme.spacing(8)};
-    height: ${theme.spacing(8)};
-    border-radius: ${theme.general.borderRadius};
-    background-color: #dfebf6;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto ${theme.spacing(2)};
-
-    img {
-      width: 60%;
-      height: 60%;
-      display: block;
-    }
-`
-);
+// 👇 Infer the Schema to get the TS Type
+type ILogin = TypeOf<typeof loginSchema>;
 
 function LoginForm() {
+  const theme = useTheme();
+  // 👇 Default Values
+  const defaultValues: ILogin = {
+    email: '',
+    password: '',
+  };
+
+  // 👇 The object returned from useForm Hook
+  const methods = useForm<ILogin>({
+    resolver: zodResolver(loginSchema),
+    defaultValues,
+  });
+
+  // 👇 Submit Handler
+  const onSubmitHandler: SubmitHandler<ILogin> = (values: ILogin) => {
+    console.log(values);
+  };
   return (
-    <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
+    <Container maxWidth="lg" sx={{ textAlign: 'center'}}>
       <Grid
         spacing={{ xs: 6, md: 10 }}
         justifyContent="center"
@@ -80,75 +60,113 @@ function LoginForm() {
         container
       >
         <Grid item md={10} lg={8} mx="auto">
-          <LabelWrapper color="success">Version 2.0.0</LabelWrapper>
-          <TypographyH1 sx={{ mb: 2 }} variant="h1">
-            Tokyo Free Black React Typescript Admin Dashboard
-          </TypographyH1>
-          <TypographyH2
-            sx={{ lineHeight: 1.5, pb: 4 }}
-            variant="h4"
-            color="text.secondary"
-            fontWeight="normal"
-          >
-            High performance React template built with lots of powerful
-            Material-UI components across multiple product niches for fast &
-            perfect apps development processes
-          </TypographyH2>
-          <Button
-            component={RouterLink}
-            to="/dashboards/tasks"
-            size="large"
-            variant="contained"
-          >
-            Browse Live Preview
-          </Button>
-          <Button
-            sx={{ ml: 2 }}
-            component="a"
-            target="_blank"
-            rel="noopener"
-            href="https://bloomui.com/product/tokyo-free-black-react-typescript-material-ui-admin-dashboard"
-            size="large"
-            variant="text"
-          >
-            Key Features
-          </Button>
-          <Grid container spacing={3} mt={5}>
-            <Grid item md={6}>
-              <MuiAvatar>
-                <img
-                  src="/static/images/logo/material-ui.svg"
-                  alt="Material-UI"
-                />
-              </MuiAvatar>
-              <Typography variant="h4">
-                <Box sx={{ pb: 2 }}>
-                  <b>Powered by MUI (Material-UI)</b>
-                </Box>
-                <Typography component="span" variant="subtitle2">
-                  A simple and customizable component library to build faster,
-                  beautiful, and accessible React apps.
-                </Typography>
-              </Typography>
+          <FormProvider {...methods}>
+            <Grid
+                container
+                sx={{
+                  boxShadow: { sm: '0 0 5px #ddd' },
+                  py: '6rem',
+                  px: '1rem',
+                  backgroundColor: theme.palette.background.paper
+                }}
+            >
+              <Grid
+                  item
+                  container
+                  justifyContent='center'
+                  rowSpacing={5}
+                  sx={{
+                    maxWidth: { sm: '45rem' },
+                    marginInline: 'auto',
+                  }}
+              >
+                <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                >
+                  <Box
+                      display='flex'
+                      flexDirection='column'
+                      component='form'
+                      noValidate
+                      autoComplete='off'
+                      onSubmit={methods.handleSubmit(onSubmitHandler)}
+                  >
+                    <Typography
+                        variant='h6'
+                        component='h1'
+                        sx={{ textAlign: 'center', mb: '1.5rem' }}
+                    >
+                      Log into your account
+                    </Typography>
+                      <TextField
+                          required
+                          type='email'
+                          name='email'
+                          label='Email'
+                          variant="filled"
+                          sx={{mb: '1rem'}}
+                      />
+                      <TextField
+                          label="Password"
+                          type="password"
+                          variant="filled"
+                      />
+
+                    <FormControlLabel
+                        control={
+                          <Checkbox
+                              size='small'
+                              aria-label='trust this device checkbox'
+                              required
+                              {...methods.register('persistUser')}
+                          />
+                        }
+                        label={
+                          <Typography
+                              variant='body2'
+                              sx={{
+                                fontSize: '0.8rem',
+                                fontWeight: 400,
+                                color: '#5e5b5d',
+                              }}
+                          >
+                            Trust this device
+                          </Typography>
+                        }
+                    />
+
+                    <LoadingButton
+                        loading={false}
+                        type='submit'
+                        variant='contained'
+                        sx={{
+                          py: '0.8rem',
+                          mt: 2,
+                          width: '80%',
+                          marginInline: 'auto',
+                        }}
+                    >
+                      Login
+                    </LoadingButton>
+                  </Box>
+                </Grid>
+              </Grid>
+              <Grid container justifyContent='center'>
+                <Stack sx={{ mt: '3rem', textAlign: 'center' }}>
+                  <Typography sx={{ fontSize: '0.9rem', mb: '1rem' }}>
+                    Need an account?{' '}
+                    <LinkItem to='/signup'>Sign up here</LinkItem>
+                  </Typography>
+                  <Typography sx={{ fontSize: '0.9rem' }}>
+                    Forgot your{' '}
+                    <LinkItem to='/forgotPassword'>password?</LinkItem>
+                  </Typography>
+                </Stack>
+              </Grid>
             </Grid>
-            <Grid item md={6}>
-              <TsAvatar>
-                <img
-                  src="/static/images/logo/typescript.svg"
-                  alt="Typescript"
-                />
-              </TsAvatar>
-              <Typography variant="h4">
-                <Box sx={{ pb: 2 }}>
-                  <b>Built with Typescript</b>
-                </Box>
-                <Typography component="span" variant="subtitle2">
-                  Tokyo Free Black features a modern technology stack and is
-                  built with React + Typescript.
-                </Typography>
-              </Typography>
-            </Grid>
-          </Grid>
+          </FormProvider>
         </Grid>
       </Grid>
     </Container>

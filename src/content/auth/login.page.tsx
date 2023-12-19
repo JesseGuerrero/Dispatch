@@ -4,7 +4,6 @@ import {
   Box,
   Typography,
   Stack,
-  Link as MuiLink,
   FormControlLabel,
   Checkbox,
 } from '@mui/material';

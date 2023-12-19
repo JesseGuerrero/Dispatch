@@ -1,157 +1,167 @@
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import { Container, Grid, Box, Typography, Stack } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { FC } from 'react';
+import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+import { object, string, TypeOf } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import FormInput from '../../../../components/FormInput';
+import { LinkItem } from '../../login/form';
+import {useTheme} from "@mui/material/styles";
+import TextField from '@mui/material/TextField';
 
-import { Link as RouterLink } from 'react-router-dom';
+// 👇 SignUp Schema with Zod
+const signupSchema = object({
+  name: string().min(1, 'Name is required').max(70),
+  email: string().min(1, 'Email is required').email('Email is invalid'),
+  password: string()
+      .min(1, 'Password is required')
+      .min(8, 'Password must be more than 8 characters')
+      .max(32, 'Password must be less than 32 characters'),
+  passwordConfirm: string().min(1, 'Please confirm your password'),
+}).refine((data) => data.password === data.passwordConfirm, {
+  path: ['passwordConfirm'],
+  message: 'Passwords do not match',
+});
 
-import { styled } from '@mui/material/styles';
-
-const TypographyH1 = styled(Typography)(
-  ({ theme }) => `
-    font-size: ${theme.typography.pxToRem(50)};
-`
-);
-
-const TypographyH2 = styled(Typography)(
-  ({ theme }) => `
-    font-size: ${theme.typography.pxToRem(17)};
-`
-);
-
-const LabelWrapper = styled(Box)(
-  ({ theme }) => `
-    background-color: ${theme.colors.success.main};
-    color: ${theme.palette.success.contrastText};
-    font-weight: bold;
-    border-radius: 30px;
-    text-transform: uppercase;
-    display: inline-block;
-    font-size: ${theme.typography.pxToRem(11)};
-    padding: ${theme.spacing(0.5)} ${theme.spacing(1.5)};
-    margin-bottom: ${theme.spacing(2)};
-`
-);
-
-const MuiAvatar = styled(Box)(
-  ({ theme }) => `
-    width: ${theme.spacing(8)};
-    height: ${theme.spacing(8)};
-    border-radius: ${theme.general.borderRadius};
-    background-color: #e5f7ff;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto ${theme.spacing(2)};
-
-    img {
-      width: 60%;
-      height: 60%;
-      display: block;
-    }
-`
-);
-
-const TsAvatar = styled(Box)(
-  ({ theme }) => `
-    width: ${theme.spacing(8)};
-    height: ${theme.spacing(8)};
-    border-radius: ${theme.general.borderRadius};
-    background-color: #dfebf6;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto ${theme.spacing(2)};
-
-    img {
-      width: 60%;
-      height: 60%;
-      display: block;
-    }
-`
-);
+// 👇 Infer the Schema to get TypeScript Type
+type ISignUp = TypeOf<typeof signupSchema>;
 
 function SignUpForm() {
+  const theme = useTheme();
+  const defaultValues: ISignUp = {
+    name: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+  };
+
+  // 👇 Object containing all the methods returned by useForm
+  const methods = useForm<ISignUp>({
+    resolver: zodResolver(signupSchema),
+    defaultValues,
+  });
+
+  // 👇 Form Handler
+  const onSubmitHandler: SubmitHandler<ISignUp> = (values: ISignUp) => {
+    console.log(JSON.stringify(values, null, 4));
+  };
   return (
-    <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
-      <Grid
-        spacing={{ xs: 6, md: 10 }}
-        justifyContent="center"
-        alignItems="center"
-        container
+      <Container
+          maxWidth="lg"
+          sx={{ backgroundColor: theme.palette.background.default}}
       >
-        <Grid item md={10} lg={8} mx="auto">
-          <LabelWrapper color="success">Version 2.0.0</LabelWrapper>
-          <TypographyH1 sx={{ mb: 2 }} variant="h1">
-            Tokyo Free Black React Typescript Admin Dashboard
-          </TypographyH1>
-          <TypographyH2
-            sx={{ lineHeight: 1.5, pb: 4 }}
-            variant="h4"
-            color="text.secondary"
-            fontWeight="normal"
+        <Grid
+            container
+            justifyContent='center'
+            alignItems='center'
+            sx={{ width: '100%', height: '100%' }}
+        >
+          <Grid
+              item md={10} lg={8} mx="auto"
+              sx={{ backgroundColor: theme.palette.background.paper }}
           >
-            High performance React template built with lots of powerful
-            Material-UI components across multiple product niches for fast &
-            perfect apps development processes
-          </TypographyH2>
-          <Button
-            component={RouterLink}
-            to="/dashboards/tasks"
-            size="large"
-            variant="contained"
-          >
-            Browse Live Preview
-          </Button>
-          <Button
-            sx={{ ml: 2 }}
-            component="a"
-            target="_blank"
-            rel="noopener"
-            href="https://bloomui.com/product/tokyo-free-black-react-typescript-material-ui-admin-dashboard"
-            size="large"
-            variant="text"
-          >
-            Key Features
-          </Button>
-          <Grid container spacing={3} mt={5}>
-            <Grid item md={6}>
-              <MuiAvatar>
-                <img
-                  src="/static/images/logo/material-ui.svg"
-                  alt="Material-UI"
-                />
-              </MuiAvatar>
-              <Typography variant="h4">
-                <Box sx={{ pb: 2 }}>
-                  <b>Powered by MUI (Material-UI)</b>
-                </Box>
-                <Typography component="span" variant="subtitle2">
-                  A simple and customizable component library to build faster,
-                  beautiful, and accessible React apps.
-                </Typography>
-              </Typography>
-            </Grid>
-            <Grid item md={6}>
-              <TsAvatar>
-                <img
-                  src="/static/images/logo/typescript.svg"
-                  alt="Typescript"
-                />
-              </TsAvatar>
-              <Typography variant="h4">
-                <Box sx={{ pb: 2 }}>
-                  <b>Built with Typescript</b>
-                </Box>
-                <Typography component="span" variant="subtitle2">
-                  Tokyo Free Black features a modern technology stack and is
-                  built with React + Typescript.
-                </Typography>
-              </Typography>
+            <Grid
+                container
+                sx={{
+                  boxShadow: { sm: '0 0 5px #ddd' },
+                  py: '6rem',
+                  px: '1rem',
+                  pt: '3em',
+                  pb: '3em'
+                }}
+            >
+              <FormProvider {...methods}>
+                <Grid
+                    item
+                    container
+                    justifyContent='center'
+                    rowSpacing={5}
+                    sx={{
+                      maxWidth: { sm: '45rem' },
+                      marginInline: 'auto',
+                    }}
+                >
+                  <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                  >
+                    <Box
+                        display='flex'
+                        flexDirection='column'
+                        component='form'
+                        noValidate
+                        autoComplete='off'
+                        sx={{ }}
+                        onSubmit={methods.handleSubmit(onSubmitHandler)}
+                    >
+                      <Typography
+                          variant='h6'
+                          component='h1'
+                          sx={{ textAlign: 'center', mb: '1.5rem' }}
+                      >
+                        Create new your account
+                      </Typography>
+
+                      <TextField
+                          variant="filled"
+                          label='Name'
+                          name='name'
+                          sx={{mb: '1rem'}}
+                          required
+                      />
+                      <TextField
+                          type='email'
+                          name='email'
+                          label='Email'
+                          variant="filled"
+                          sx={{mb: '1rem'}}
+                          required
+                      />
+                      <TextField
+                          label="Password"
+                          type="password"
+                          autoComplete="current-password"
+                          variant="filled"
+                          sx={{mb: '1rem'}}
+                          required
+                      />
+                      <TextField
+                          type='password'
+                          label='Confirm Password'
+                          name='passwordConfirm'
+                          variant="filled"
+                          required
+                      />
+
+                      <LoadingButton
+                          loading={false}
+                          type='submit'
+                          variant='contained'
+                          sx={{
+                            py: '0.8rem',
+                            mt: 2,
+                            width: '80%',
+                            marginInline: 'auto',
+                          }}
+                      >
+                        Sign Up
+                      </LoadingButton>
+                    </Box>
+                  </Grid>
+                </Grid>
+                <Grid container justifyContent='center'>
+                  <Stack sx={{ mt: '3rem', textAlign: 'center' }}>
+                    <Typography sx={{ fontSize: '0.9rem', mb: '1rem' }}>
+                      Already have an account? <LinkItem to='/'>Login</LinkItem>
+                    </Typography>
+                  </Stack>
+                </Grid>
+              </FormProvider>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
   );
 }
 
