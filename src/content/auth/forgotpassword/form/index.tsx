@@ -33,7 +33,7 @@ const loginSchema = object({
 // 👇 Infer the Schema to get the TS Type
 type ILogin = TypeOf<typeof loginSchema>;
 
-function LoginForm() {
+function ForgotPasswordForm() {
   const theme = useTheme();
   // 👇 Default Values
   const defaultValues: ILogin = {
@@ -98,7 +98,7 @@ function LoginForm() {
                         component='h1'
                         sx={{ textAlign: 'center', mb: '1.5rem' }}
                     >
-                      Log into your account
+                      Send Password Reset Email
                     </Typography>
                       <TextField
                           required
@@ -108,35 +108,6 @@ function LoginForm() {
                           variant="filled"
                           sx={{mb: '1rem'}}
                       />
-                      <TextField
-                          label="Password"
-                          type="password"
-                          variant="filled"
-                      />
-
-                    <FormControlLabel
-                        control={
-                          <Checkbox
-                              size='small'
-                              aria-label='trust this device checkbox'
-                              required
-                              {...methods.register('persistUser')}
-                          />
-                        }
-                        label={
-                          <Typography
-                              variant='body2'
-                              sx={{
-                                fontSize: '0.8rem',
-                                fontWeight: 400,
-                                color: '#5e5b5d',
-                              }}
-                          >
-                            Trust this device
-                          </Typography>
-                        }
-                    />
-
                     <LoadingButton
                         loading={false}
                         type='submit'
@@ -147,9 +118,9 @@ function LoginForm() {
                           width: '80%',
                           marginInline: 'auto',
                         }}
-                        href={'/dashboard/tasks'}
+                        href={'#'}
                     >
-                      Login
+                      Send Email
                     </LoadingButton>
                   </Box>
                 </Grid>
@@ -161,8 +132,8 @@ function LoginForm() {
                     <LinkItem to='/signup'>Sign up here</LinkItem>
                   </Typography>
                   <Typography sx={{ fontSize: '0.9rem' }}>
-                    Forgot your{' '}
-                    <LinkItem to='/forgot-password'>password?</LinkItem>
+                    Remembered it? Go to{' '}
+                    <LinkItem to='/login'>login?</LinkItem>
                   </Typography>
                 </Stack>
               </Grid>
@@ -174,4 +145,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default ForgotPasswordForm;

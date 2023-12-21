@@ -153,7 +153,7 @@ function SignUpForm() {
                 <Grid container justifyContent='center'>
                   <Stack sx={{ mt: '3rem', textAlign: 'center' }}>
                     <Typography sx={{ fontSize: '0.9rem', mb: '1rem' }}>
-                      Already have an account? <LinkItem to='/'>Login</LinkItem>
+                      Already have an account? <LinkItem to='/login'>Login</LinkItem>
                     </Typography>
                   </Stack>
                 </Grid>

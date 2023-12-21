@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 import {styled, useTheme} from '@mui/material/styles';
 import Logo from 'src/components/LogoSign';
-import SignUpForm from './form';
+import ForgotPasswordForm from './form';
 
 const AuthWrapper = styled(Box)(
   () => `
@@ -14,23 +14,23 @@ const AuthWrapper = styled(Box)(
 `
 );
 
-function SignUp() {
+function ForgotPassword() {
     const theme = useTheme();
     return (
     <AuthWrapper>
       <Helmet>
-        <title>Sign Up</title>
+        <title>Forgot password</title>
       </Helmet>
       <Container maxWidth="lg">
         <Box display="flex" justifyContent="center" py={5} alignItems="center">
           <Logo />
         </Box>
-        <Card sx={{ p: 10, mb: 10, boxShadow: 'none', backgroundColor: theme.palette.background.default, pt: '5px'}}>
-          <SignUpForm />
+        <Card sx={{ p: 10, mb: 10, boxShadow: 'none', backgroundColor: theme.palette.background.default, pt: '5px' }}>
+          <ForgotPasswordForm />
         </Card>
       </Container>
     </AuthWrapper>
     );
 }
 
-export default SignUp;
+export default ForgotPassword;

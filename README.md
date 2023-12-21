@@ -9,23 +9,23 @@
 ## TODO
 
 ### 1. Find a few templates using Material UI
-- Landing Page: Find a Material UI dark typescript landing to login/register
+- <s>Landing Page: Find a Material UI dark typescript landing to login/register</s>
 - <s>Dashboard/Form: Tokyo Free Black React Typescript Admin Dashboard</s>
-- Login/register: Find one, add forgot password after
+- <s>Login/register: Find one, add forgot password after</s>
 
 ### 2. Put together Material UI templates into this project
-- Landing Page
-- Login/register -> Just do a basic link to dashboard/form
-- Dashboard/Form
+- <s>Landing Page</s>
+- <s>Login/register</s>
+- <s>Dashboard/Form</s>
 
 ### 3. Design full frontend in this order
-- Home
-- Login (With backend, unlock different header when logged in)
-  - Create check session, https://chat.openai.com/share/4126b409-14a1-41a8-8122-08ae894d26b2
+- <s>Home</s>
+- <s>Login</s> (With backend, unlock different header when logged in)
+  - (After all frontend)Create check session, https://chat.openai.com/share/4126b409-14a1-41a8-8122-08ae894d26b2
   - Session invalid, redirect to login
-- Register (With backend)
-- Logout (With backend)
-- Forgot Password (Empty endpoints)
+- <s>Register</s> (With backend)
+- <s>Logout</s> (With backend)
+- <s>Forgot Password</s> (Empty endpoints)
 - Broadcast (Empty endpoints)
   - Send by tag and username (Empty endpoints)
 - Settings (Empty endpoints) <br>

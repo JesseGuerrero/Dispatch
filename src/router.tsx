@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { RouteObject } from 'react-router';
 
 import SidebarLayout from 'src/layouts/SidebarLayout';
+import SidebarLayout2 from 'src/layouts/SidebarLayout2';
 import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
@@ -15,12 +16,10 @@ const Loader = (Component) => (props) =>
   );
 
 // Pages
-
 const Overview = Loader(lazy(() => import('src/content/overview')));
-const LoginPage2 = Loader(lazy(() => import('src/content/auth/login.page')));
-const SignupPage2 = Loader(lazy(() => import('src/content/auth/Signup.page')));
 const LoginPage = Loader(lazy(() => import('src/content/auth/login')));
 const SignupPage = Loader(lazy(() => import('src/content/auth/signup')));
+const ForgotPasswordPage = Loader(lazy(() => import('src/content/auth/forgotpassword')));
 
 
 // Dashboards
@@ -99,16 +98,8 @@ const routes: RouteObject[] = [
         element: <SignupPage />
       },
       {
-        path:'login2',
-        element: <LoginPage2 />
-      },
-      {
-        path: 'signup2',
-        element: <SignupPage2 />
-      },
-      {
-        path: 'overview',
-        element: <Navigate to="/" replace />
+        path:'forgot-password',
+        element: <ForgotPasswordPage />
       },
       {
         path: 'status',
@@ -142,8 +133,22 @@ const routes: RouteObject[] = [
     ]
   },
   {
-    path: 'dashboards',
+    path: 'dashboard',
     element: <SidebarLayout />,
+    children: [
+      {
+        path: '',
+        element: <Navigate to="tasks" replace />
+      },
+      {
+        path: 'tasks',
+        element: <Tasks />
+      }
+    ]
+  },
+  {
+    path: 'dashboards',
+    element: <SidebarLayout2 />,
     children: [
       {
         path: '',
@@ -161,7 +166,7 @@ const routes: RouteObject[] = [
   },
   {
     path: 'management',
-    element: <SidebarLayout />,
+    element: <SidebarLayout2 />,
     children: [
       {
         path: '',
@@ -192,7 +197,7 @@ const routes: RouteObject[] = [
   },
   {
     path: '/components',
-    element: <SidebarLayout />,
+    element: <SidebarLayout2 />,
     children: [
       {
         path: '',

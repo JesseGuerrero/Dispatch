@@ -3,6 +3,8 @@ import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
+import muiImage from 'src/assets/material-ui.svg';
+import typescriptImage from 'src/assets/material-ui.svg';
 
 const TypographyH1 = styled(Typography)(
   ({ theme }) => `
@@ -80,9 +82,9 @@ function Hero() {
         container
       >
         <Grid item md={10} lg={8} mx="auto">
-          <LabelWrapper color="success">Version 2.0.0</LabelWrapper>
+          <LabelWrapper color="success">Version 1.0.0</LabelWrapper>
           <TypographyH1 sx={{ mb: 2 }} variant="h1">
-            Tokyo Free Black React Typescript Admin Dashboard
+            Dispatch: Newsletter Manager
           </TypographyH1>
           <TypographyH2
             sx={{ lineHeight: 1.5, pb: 4 }}
@@ -90,24 +92,22 @@ function Hero() {
             color="text.secondary"
             fontWeight="normal"
           >
-            High performance React template built with lots of powerful
-            Material-UI components across multiple product niches for fast &
-            perfect apps development processes
+            Newsletter manager for bloggers. Send emails to your subscribers.
           </TypographyH2>
           <Button
             component={RouterLink}
-            to="/dashboards/tasks"
+            to="/login"
             size="large"
             variant="contained"
           >
-            Browse Live Preview
+            Login
           </Button>
           <Button
             sx={{ ml: 2 }}
             component="a"
             target="_blank"
             rel="noopener"
-            href="https://bloomui.com/product/tokyo-free-black-react-typescript-material-ui-admin-dashboard"
+            href="#"
             size="large"
             variant="text"
           >
@@ -117,7 +117,7 @@ function Hero() {
             <Grid item md={6}>
               <MuiAvatar>
                 <img
-                  src="/static/images/logo/material-ui.svg"
+                  src={muiImage}
                   alt="Material-UI"
                 />
               </MuiAvatar>
@@ -134,7 +134,7 @@ function Hero() {
             <Grid item md={6}>
               <TsAvatar>
                 <img
-                  src="/static/images/logo/typescript.svg"
+                  src={typescriptImage}
                   alt="Typescript"
                 />
               </TsAvatar>
