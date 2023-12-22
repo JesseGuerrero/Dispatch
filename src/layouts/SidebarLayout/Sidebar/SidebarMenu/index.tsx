@@ -255,6 +255,98 @@ function SidebarMenu() {
           </SubMenuWrapper>
         </List>
         <List
+            component="div"
+            subheader={
+              <ListSubheader component="div" disableSticky>
+                Manage Scheduler
+              </ListSubheader>
+            }
+        >
+          <SubMenuWrapper>
+            <List component="div">
+              <ListItem component="div">
+                <Button
+                    disableRipple
+                    component={RouterLink}
+                    onClick={closeSidebar}
+                    to="/dashboards/tasks"
+                    startIcon={<BrightnessLowTwoToneIcon />}
+                >
+                  Schedule Email
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                    disableRipple
+                    component={RouterLink}
+                    onClick={closeSidebar}
+                    to="/dashboards/messenger"
+                    startIcon={<MmsTwoToneIcon />}
+                >
+                  Edit Schedule
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                    disableRipple
+                    component={RouterLink}
+                    onClick={closeSidebar}
+                    to="/dashboards/messenger"
+                    startIcon={<MmsTwoToneIcon />}
+                >
+                  Delete Schedule
+                </Button>
+              </ListItem>
+            </List>
+          </SubMenuWrapper>
+        </List>
+        <List
+            component="div"
+            subheader={
+              <ListSubheader component="div" disableSticky>
+                Manage Courses
+              </ListSubheader>
+            }
+        >
+          <SubMenuWrapper>
+            <List component="div">
+              <ListItem component="div">
+                <Button
+                    disableRipple
+                    component={RouterLink}
+                    onClick={closeSidebar}
+                    to="/dashboards/tasks"
+                    startIcon={<BrightnessLowTwoToneIcon />}
+                >
+                  Create Course
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                    disableRipple
+                    component={RouterLink}
+                    onClick={closeSidebar}
+                    to="/dashboards/messenger"
+                    startIcon={<MmsTwoToneIcon />}
+                >
+                  Edit Course
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                    disableRipple
+                    component={RouterLink}
+                    onClick={closeSidebar}
+                    to="/dashboards/messenger"
+                    startIcon={<MmsTwoToneIcon />}
+                >
+                  Delete Course
+                </Button>
+              </ListItem>
+            </List>
+          </SubMenuWrapper>
+        </List>
+        <List
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
@@ -367,98 +459,7 @@ function SidebarMenu() {
             </List>
           </SubMenuWrapper>
         </List>
-        <List
-          component="div"
-          subheader={
-            <ListSubheader component="div" disableSticky>
-              Manage Courses
-            </ListSubheader>
-          }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/dashboards/tasks"
-                  startIcon={<BrightnessLowTwoToneIcon />}
-                >
-                  Create Course
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/dashboards/messenger"
-                  startIcon={<MmsTwoToneIcon />}
-                >
-                  Edit Course
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="/dashboards/messenger"
-                    startIcon={<MmsTwoToneIcon />}
-                >
-                  Delete Course
-                </Button>
-              </ListItem>
-            </List>
-          </SubMenuWrapper>
-        </List>
-        <List
-          component="div"
-          subheader={
-            <ListSubheader component="div" disableSticky>
-              Manage Scheduler
-            </ListSubheader>
-          }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/dashboards/tasks"
-                  startIcon={<BrightnessLowTwoToneIcon />}
-                >
-                  Schedule Email
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/dashboards/messenger"
-                  startIcon={<MmsTwoToneIcon />}
-                >
-                  Edit Schedule
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/dashboards/messenger"
-                  startIcon={<MmsTwoToneIcon />}
-                >
-                  Delete Schedule
-                </Button>
-              </ListItem>
-            </List>
-          </SubMenuWrapper>
-        </List>
+
       </MenuWrapper>
     </>
   );
