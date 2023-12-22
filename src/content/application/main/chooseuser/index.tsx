@@ -53,7 +53,7 @@ const currencies = [
   }
 ];
 
-function PickNewsLetter() {
+function ChooseUser() {
   const [currency, setCurrency] = useState('EUR');
 
   const handleChange = (event) => {
@@ -479,4 +479,4 @@ function PickNewsLetter() {
   );
 }
 
-export default PickNewsLetter;
+export default ChooseUser;

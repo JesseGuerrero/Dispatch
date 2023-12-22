@@ -147,7 +147,7 @@ function LoginForm() {
                           width: '80%',
                           marginInline: 'auto',
                         }}
-                        href={'/dashboard/tasks'}
+                        href={'dashboard'}
                     >
                       Login
                     </LoadingButton>
@@ -158,11 +158,11 @@ function LoginForm() {
                 <Stack sx={{ mt: '3rem', textAlign: 'center' }}>
                   <Typography sx={{ fontSize: '0.9rem', mb: '1rem' }}>
                     Need an account?{' '}
-                    <LinkItem to='/signup'>Sign up here</LinkItem>
+                    <LinkItem to='/Dispatch/signup'>Sign up here</LinkItem>
                   </Typography>
                   <Typography sx={{ fontSize: '0.9rem' }}>
                     Forgot your{' '}
-                    <LinkItem to='/forgot-password'>password?</LinkItem>
+                    <LinkItem to='/Dispatch/forgot-password'>password?</LinkItem>
                   </Typography>
                 </Stack>
               </Grid>

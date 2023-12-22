@@ -188,7 +188,7 @@ function SidebarMenu() {
                     disableRipple
                     component={RouterLink}
                     onClick={closeSidebar}
-                    to="/overview"
+                    to="/Dispatch/dashboard/"
                     startIcon={<DesignServicesTwoToneIcon />}
                 >
                   Overview
@@ -199,7 +199,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/dashboard/broadcast"
+                  to="broadcast"
                   startIcon={<DesignServicesTwoToneIcon />}
                 >
                   Broadcast
@@ -223,7 +223,7 @@ function SidebarMenu() {
                     disableRipple
                     component={RouterLink}
                     onClick={closeSidebar}
-                    to="/dashboards/tasks"
+                    to="create-email"
                     startIcon={<BrightnessLowTwoToneIcon />}
                 >
                   Create Email
@@ -234,7 +234,7 @@ function SidebarMenu() {
                     disableRipple
                     component={RouterLink}
                     onClick={closeSidebar}
-                    to="/dashboards/messenger"
+                    to="edit-email"
                     startIcon={<MmsTwoToneIcon />}
                 >
                   Edit Email
@@ -245,7 +245,7 @@ function SidebarMenu() {
                     disableRipple
                     component={RouterLink}
                     onClick={closeSidebar}
-                    to="/dashboards/messenger"
+                    to="delete-email"
                     startIcon={<MmsTwoToneIcon />}
                 >
                   Delete Email
@@ -269,7 +269,7 @@ function SidebarMenu() {
                     disableRipple
                     component={RouterLink}
                     onClick={closeSidebar}
-                    to="/dashboards/tasks"
+                    to="schedule-email"
                     startIcon={<BrightnessLowTwoToneIcon />}
                 >
                   Schedule Email
@@ -280,7 +280,7 @@ function SidebarMenu() {
                     disableRipple
                     component={RouterLink}
                     onClick={closeSidebar}
-                    to="/dashboards/messenger"
+                    to="edit-schedule"
                     startIcon={<MmsTwoToneIcon />}
                 >
                   Edit Schedule
@@ -291,7 +291,7 @@ function SidebarMenu() {
                     disableRipple
                     component={RouterLink}
                     onClick={closeSidebar}
-                    to="/dashboards/messenger"
+                    to="delete-schedule"
                     startIcon={<MmsTwoToneIcon />}
                 >
                   Delete Schedule
@@ -315,7 +315,7 @@ function SidebarMenu() {
                     disableRipple
                     component={RouterLink}
                     onClick={closeSidebar}
-                    to="/dashboards/tasks"
+                    to="create-course"
                     startIcon={<BrightnessLowTwoToneIcon />}
                 >
                   Create Course
@@ -326,7 +326,7 @@ function SidebarMenu() {
                     disableRipple
                     component={RouterLink}
                     onClick={closeSidebar}
-                    to="/dashboards/messenger"
+                    to="edit-course"
                     startIcon={<MmsTwoToneIcon />}
                 >
                   Edit Course
@@ -337,7 +337,7 @@ function SidebarMenu() {
                     disableRipple
                     component={RouterLink}
                     onClick={closeSidebar}
-                    to="/dashboards/messenger"
+                    to="delete-course"
                     startIcon={<MmsTwoToneIcon />}
                 >
                   Delete Course
@@ -361,7 +361,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/dashboards/tasks"
+                  to="view-subscribers"
                   startIcon={<BrightnessLowTwoToneIcon />}
                 >
                   Subscribers
@@ -372,7 +372,7 @@ function SidebarMenu() {
                     disableRipple
                     component={RouterLink}
                     onClick={closeSidebar}
-                    to="/dashboards/tasks"
+                    to="add-subscribers"
                     startIcon={<BrightnessLowTwoToneIcon />}
                 >
                   Add Subscriber
@@ -384,7 +384,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/dashboards/messenger"
+                  to="edit-subscribers"
                   startIcon={<MmsTwoToneIcon />}
                 >
                   Edit subscriber
@@ -395,7 +395,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/dashboards/tasks"
+                  to="delete-subscriber"
                   startIcon={<BrightnessLowTwoToneIcon />}
                 >
                   Delete Subscriber
@@ -406,7 +406,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/dashboards/tasks"
+                  to="subscriber-statistics"
                   startIcon={<BrightnessLowTwoToneIcon />}
                 >
                   Subscriber Statistics
@@ -417,7 +417,7 @@ function SidebarMenu() {
                     disableRipple
                     component={RouterLink}
                     onClick={closeSidebar}
-                    to="/dashboards/tasks"
+                    to="add-tag"
                     startIcon={<BrightnessLowTwoToneIcon />}
                 >
                   Add tag
@@ -428,7 +428,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/dashboards/messenger"
+                  to="add-email-to-tag"
                   startIcon={<MmsTwoToneIcon />}
                 >
                   Add email to tag
@@ -439,7 +439,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/dashboards/messenger"
+                  to="remove-email-from-tags"
                   startIcon={<MmsTwoToneIcon />}
                 >
                   Remove email from tags
@@ -450,7 +450,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/dashboards/messenger"
+                  to="delete-tag"
                   startIcon={<MmsTwoToneIcon />}
                 >
                   Delete tag

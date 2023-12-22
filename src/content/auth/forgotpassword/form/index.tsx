@@ -129,11 +129,11 @@ function ForgotPasswordForm() {
                 <Stack sx={{ mt: '3rem', textAlign: 'center' }}>
                   <Typography sx={{ fontSize: '0.9rem', mb: '1rem' }}>
                     Need an account?{' '}
-                    <LinkItem to='/signup'>Sign up here</LinkItem>
+                    <LinkItem to='/Dispatch/signup'>Sign up here</LinkItem>
                   </Typography>
                   <Typography sx={{ fontSize: '0.9rem' }}>
                     Remembered it? Go to{' '}
-                    <LinkItem to='/login'>login?</LinkItem>
+                    <LinkItem to='/Dispatch/login'>login?</LinkItem>
                   </Typography>
                 </Stack>
               </Grid>

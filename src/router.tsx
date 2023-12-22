@@ -26,7 +26,7 @@ const ForgotPasswordPage = Loader(lazy(() => import('src/content/auth/forgotpass
 
 // Main
 const Broadcast = Loader(lazy(() => import('src/content/application/main/broadcast')));
-const ChooseNewsletter = Loader(lazy(() => import('src/content/application/main/newsletters')));
+const ChooseUser = Loader(lazy(() => import('src/content/application/main/chooseuser')));
 const Overview= Loader(lazy(() => import('src/content/application/main/overview')));
 const Settings = Loader(lazy(() => import('src/content/application/main/settings')));
 
@@ -37,11 +37,11 @@ const EditCourse = Loader(lazy(() => import('src/content/application/managecours
 
 //Manage Newsletter
 const AddEmailToTag = Loader(lazy(() => import('src/content/application/managenewsletter/addemailtotag')));
-const AddSubscriber = Loader(lazy(() => import('src/content/application/managenewsletter/addsubscriber')));
+const AddSubscribers = Loader(lazy(() => import('src/content/application/managenewsletter/addsubscriber')));
 const AddTag = Loader(lazy(() => import('src/content/application/managenewsletter/addtag')));
 const DeleteSubscriber = Loader(lazy(() => import('src/content/application/managenewsletter/deletesubscriber')));
 const DeleteTag = Loader(lazy(() => import('src/content/application/managenewsletter/deletetag')));
-const EditSubscriber = Loader(lazy(() => import('src/content/application/managenewsletter/editsubscriber')));
+const EditSubscribers = Loader(lazy(() => import('src/content/application/managenewsletter/editsubscriber')));
 const RemoveEmailFromTags = Loader(lazy(() => import('src/content/application/managenewsletter/removeemailfromtags')));
 const Subscribers = Loader(lazy(() => import('src/content/application/managenewsletter/subscribers')));
 const SubscriberStatistics = Loader(lazy(() => import('src/content/application/managenewsletter/subscriberstatistics')));
@@ -122,11 +122,11 @@ const routes: RouteObject[] = [
     element: <BaseLayout />,
     children: [
       {
-        path: '/',
+        path: '',
         element: <Home />
       },
       {
-        path:'login',
+        path: 'login',
         element: <LoginPage />
       },
       {
@@ -134,55 +134,102 @@ const routes: RouteObject[] = [
         element: <SignupPage />
       },
       {
-        path:'forgot-password',
+        path: 'forgot-password',
         element: <ForgotPasswordPage />
       },
       {
-        path: 'status',
+        path: 'dashboard',
+        element: <SidebarLayout />,
         children: [
           {
             path: '',
-            element: <Navigate to="404" replace />
+            element: <Overview />
           },
           {
-            path: '404',
-            element: <Status404 />
+            path: 'broadcast',
+            element: <Broadcast />
           },
           {
-            path: '500',
-            element: <Status500 />
+            path: 'choose-user',
+            element: <ChooseUser />
           },
           {
-            path: 'maintenance',
-            element: <StatusMaintenance />
+            path: 'settings',
+            element: <Settings />
           },
           {
-            path: 'coming-soon',
-            element: <StatusComingSoon />
+            path: 'create-course',
+            element: <CreateCourse />
+          },
+          {
+            path: 'delete-course',
+            element: <DeleteCourse />
+          },
+          {
+            path: 'edit-course',
+            element: <EditCourse />
+          },
+          {
+            path: 'add-email-to-tag',
+            element: <AddEmailToTag />
+          },
+          {
+            path: 'add-subscribers',
+            element: <AddSubscribers />
+          },
+          {
+            path: 'add-tag',
+            element: <AddTag />
+          },
+          {
+            path: 'delete-subscriber',
+            element: <DeleteSubscriber />
+          },
+          {
+            path: 'delete-tag',
+            element: <DeleteTag />
+          },
+          {
+            path: 'edit-subscribers',
+            element: <EditSubscribers />
+          },
+          {
+            path: 'remove-email-from-tags',
+            element: <RemoveEmailFromTags />
+          },
+          {
+            path: 'view-subscribers',
+            element: <Subscribers />
+          },
+          {
+            path: 'subscriber-statistics',
+            element: <SubscriberStatistics />
+          },
+          {
+            path: 'delete-schedule',
+            element: <DeleteSchedule />
+          },
+          {
+            path: 'edit-schedule',
+            element: <EditSchedule />
+          },
+          {
+            path: 'schedule-email',
+            element: <ScheduleEmail />
+          },
+          {
+            path: 'create-email',
+            element: <CreateEmail />
+          },
+          {
+            path: 'edit-email',
+            element: <EditEmail />
+          },
+          {
+            path: 'delete-email',
+            element: <DeleteEmail />
           }
         ]
-      },
-      {
-        path: '*',
-        element: <Status404 />
-      }
-    ]
-  },
-  {
-    path: 'dashboard',
-    element: <SidebarLayout />,
-    children: [
-      {
-        path: '',
-        element: <Navigate to="tasks" replace />
-      },
-      {
-        path: 'tasks',
-        element: <Tasks />
-      },
-      {
-        path: 'broadcast',
-        element: <Broadcast />
       }
     ]
   },
@@ -236,7 +283,7 @@ const routes: RouteObject[] = [
     ]
   },
   {
-    path: '/components',
+    path: 'components',
     element: <SidebarLayout2 />,
     children: [
       {
@@ -280,7 +327,37 @@ const routes: RouteObject[] = [
         element: <Forms />
       }
     ]
+  },
+  {
+    path: 'status',
+    children: [
+      {
+        path: '',
+        element: <Navigate to="404" replace />
+      },
+      {
+        path: '404',
+        element: <Status404 />
+      },
+      {
+        path: '500',
+        element: <Status500 />
+      },
+      {
+        path: 'maintenance',
+        element: <StatusMaintenance />
+      },
+      {
+        path: 'coming-soon',
+        element: <StatusComingSoon />
+      }
+    ]
+  },
+  {
+    path: '*',
+    element: <Status404 />
   }
 ];
+
 
 export default routes;

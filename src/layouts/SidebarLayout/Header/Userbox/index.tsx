@@ -60,7 +60,7 @@ const UserBoxDescription = styled(Typography)(
 
 function HeaderUserbox() {
   const user = {
-    name: 'Catherine Pike',
+    name: 'Newsletter1',
     avatar: '/static/images/avatars/1.jpg',
     jobtitle: 'Project Manager'
   };
@@ -122,7 +122,7 @@ function HeaderUserbox() {
           {/*</ListItem>*/}
           <ListItem
             button
-            to="/management/profile/settings"
+            to="settings"
             component={NavLink}
           >
             <AccountTreeTwoToneIcon fontSize="small" />

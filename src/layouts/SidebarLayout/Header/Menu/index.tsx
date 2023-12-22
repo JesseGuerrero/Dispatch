@@ -89,11 +89,11 @@ function HeaderMenu() {
             classes={{ root: 'MuiListItem-indicators' }}
             button
             component={NavLink}
-            to="/components/buttons"
+            to="choose-user"
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
-              primary="Newsletters"
+              primary="Choose User"
             />
           </ListItem>
         </List>
