@@ -15,12 +15,17 @@ const Loader = (Component) => (props) =>
     </Suspense>
   );
 
-// Pages
+// Public Pages
 const Overview = Loader(lazy(() => import('src/content/overview')));
 const LoginPage = Loader(lazy(() => import('src/content/auth/login')));
 const SignupPage = Loader(lazy(() => import('src/content/auth/signup')));
 const ForgotPasswordPage = Loader(lazy(() => import('src/content/auth/forgotpassword')));
 
+
+//---Application---
+
+// Main
+const Broadcast = Loader(lazy(() => import('src/content/application/main/broadcast')));
 
 // Dashboards
 
@@ -143,6 +148,10 @@ const routes: RouteObject[] = [
       {
         path: 'tasks',
         element: <Tasks />
+      },
+      {
+        path: 'broadcast',
+        element: <Broadcast />
       }
     ]
   },

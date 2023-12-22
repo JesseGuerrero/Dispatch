@@ -199,7 +199,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/overview"
+                  to="/dashboard/broadcast"
                   startIcon={<DesignServicesTwoToneIcon />}
                 >
                   Broadcast
