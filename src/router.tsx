@@ -118,7 +118,7 @@ const StatusMaintenance = Loader(
 
 const routes: RouteObject[] = [
   {
-    path: '',
+    path: 'Dispatch',
     element: <BaseLayout />,
     children: [
       {
