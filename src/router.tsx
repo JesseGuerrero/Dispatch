@@ -16,7 +16,7 @@ const Loader = (Component) => (props) =>
   );
 
 // Public Pages
-const Overview = Loader(lazy(() => import('src/content/overview')));
+const Home = Loader(lazy(() => import('src/content/overview')));
 const LoginPage = Loader(lazy(() => import('src/content/auth/login')));
 const SignupPage = Loader(lazy(() => import('src/content/auth/signup')));
 const ForgotPasswordPage = Loader(lazy(() => import('src/content/auth/forgotpassword')));
@@ -26,6 +26,37 @@ const ForgotPasswordPage = Loader(lazy(() => import('src/content/auth/forgotpass
 
 // Main
 const Broadcast = Loader(lazy(() => import('src/content/application/main/broadcast')));
+const ChooseNewsletter = Loader(lazy(() => import('src/content/application/main/newsletters')));
+const Overview= Loader(lazy(() => import('src/content/application/main/overview')));
+const Settings = Loader(lazy(() => import('src/content/application/main/settings')));
+
+//Manage Courses
+const CreateCourse = Loader(lazy(() => import('src/content/application/managecourses/createcourse')));
+const DeleteCourse = Loader(lazy(() => import('src/content/application/managecourses/deletecourse')));
+const EditCourse = Loader(lazy(() => import('src/content/application/managecourses/editcourse')));
+
+//Manage Newsletter
+const AddEmailToTag = Loader(lazy(() => import('src/content/application/managenewsletter/addemailtotag')));
+const AddSubscriber = Loader(lazy(() => import('src/content/application/managenewsletter/addsubscriber')));
+const AddTag = Loader(lazy(() => import('src/content/application/managenewsletter/addtag')));
+const DeleteSubscriber = Loader(lazy(() => import('src/content/application/managenewsletter/deletesubscriber')));
+const DeleteTag = Loader(lazy(() => import('src/content/application/managenewsletter/deletetag')));
+const EditSubscriber = Loader(lazy(() => import('src/content/application/managenewsletter/editsubscriber')));
+const RemoveEmailFromTags = Loader(lazy(() => import('src/content/application/managenewsletter/removeemailfromtags')));
+const Subscribers = Loader(lazy(() => import('src/content/application/managenewsletter/subscribers')));
+const SubscriberStatistics = Loader(lazy(() => import('src/content/application/managenewsletter/subscriberstatistics')));
+
+//Manage Scheduler
+const DeleteSchedule = Loader(lazy(() => import('src/content/application/managescheduler/deleteschedule')));
+const EditSchedule = Loader(lazy(() => import('src/content/application/managescheduler/editschedule')));
+const ScheduleEmail = Loader(lazy(() => import('src/content/application/managescheduler/scheduleemail')));
+
+//Write Email
+const CreateEmail = Loader(lazy(() => import('src/content/application/writeemail/createemail')));
+const DeleteEmail = Loader(lazy(() => import('src/content/application/writeemail/deleteemail')));
+const EditEmail = Loader(lazy(() => import('src/content/application/writeemail/editemail')));
+
+//---------
 
 // Dashboards
 
@@ -92,7 +123,7 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '/',
-        element: <Overview />
+        element: <Home />
       },
       {
         path:'login',
