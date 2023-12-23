@@ -31,7 +31,7 @@ export const SidebarProvider: FC = ({ children }) => {
   };
   const user = {
     avatar: '',
-    name: '',
+    name: 'Jesse',
   };
 
   const newsletter = {

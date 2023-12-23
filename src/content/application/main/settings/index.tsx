@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import PageTitle from 'src/components/PageTitle';
-import { useState } from 'react';
+import {useContext, useEffect, useState} from 'react';
 
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import {
@@ -32,40 +32,16 @@ import VolumeUp from '@mui/icons-material/VolumeUp';
 
 import Switch from '@mui/material/Switch';
 import AddTwoToneIcon from "@mui/icons-material/AddTwoTone";
-
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
-
-const currencies = [
-  {
-    value: 'USD',
-    label: '$'
-  },
-  {
-    value: 'EUR',
-    label: '€'
-  },
-  {
-    value: 'BTC',
-    label: '฿'
-  },
-  {
-    value: 'JPY',
-    label: '¥'
-  }
-];
+import {SidebarContext} from "../../../../contexts/SidebarContext";
 
 function Settings() {
-  const [currency, setCurrency] = useState('EUR');
+  const { user } = useContext(SidebarContext);
+  const [isUserAdmin, setIsUserAdmin] = useState<boolean>(false);
 
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
-  };
 
-  const [value, setValue] = useState(30);
-
-  const handleChange2 = (event, newValue) => {
-    setValue(newValue);
-  };
+  useEffect(() => {
+    setIsUserAdmin(user.name == "Admin");
+  }, [user.name]);
 
   return (
     <>
@@ -120,9 +96,8 @@ function Settings() {
                     <Button
                         sx={{margin: 1}}
                         variant="contained"
-                        startIcon={<AddTwoToneIcon fontSize="small"/>}
                     >
-                      Update
+                      Update Newsletter
                     </Button>
                   </div>
                 </Box>
@@ -146,92 +121,110 @@ function Settings() {
                     <TextField
                         required
                         id="outlined-required"
-                        label="Required"
-                        defaultValue="Hello World"
+                        label="Email Nickname"
                     />
                     <TextField
-                        disabled
-                        id="outlined-disabled"
-                        label="Disabled"
-                        defaultValue="Hello World"
+                        required
+                        id="outlined-required"
+                        label="Email"
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Host SMTP"
+                    />
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="SMTP Port"
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Protocol"
                     />
                     <TextField
                         id="outlined-password-input"
                         label="Password"
                         type="password"
-                        autoComplete="current-password"
                     />
-                    <TextField
-                        id="outlined-read-only-input"
-                        label="Read Only"
-                        defaultValue="Hello World"
-                        InputProps={{
-                          readOnly: true
-                        }}
+                  </div>
+                  <div>
+                    <FormControlLabel
+                        control={<Checkbox defaultChecked color="secondary" />}
+                        label="SMTP Auth"
+                        sx={{ml:0.5}}
                     />
-                    <TextField
-                        id="outlined-number"
-                        label="Number"
-                        type="number"
-                        InputLabelProps={{
-                          shrink: true
-                        }}
+                  </div>
+                  <div>
+                    <FormControlLabel
+                        control={<Checkbox defaultChecked color="secondary" />}
+                        label="TLS Enable"
+                        sx={{ml:0.5}}
                     />
-                    <TextField
-                        id="outlined-search"
-                        label="Search field"
-                        type="search"
-                    />
-                    <TextField
-                        id="outlined-helperText"
-                        label="Helper text"
-                        defaultValue="Default Value"
-                        helperText="Some important text"
+                  </div>
+                  <div>
+                    <FormControlLabel
+                        control={<Checkbox defaultChecked color="secondary" />}
+                        label="SSL Enable"
+                        sx={{ml:0.5}}
                     />
                   </div>
                 </Box>
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12}>
-            <Card>
-              <CardHeader title="Change Password" />
-              <Divider />
-              <CardContent>
-                <Box
-                    component="form"
-                    sx={{
-                      '& .MuiTextField-root': {m: 1, width: '25ch'}
-                    }}
-                    noValidate
-                    autoComplete="off"
-                >
-                  <div>
-                    <TextField
-                        id="outlined-password-input"
-                        label="Old password"
-                        type="password"
-                    />
-                    <TextField
-                        id="outlined-password-input"
-                        label="New password"
-                        type="password"
-                    />
-                  </div>
-                  <div>
-                    <Button
-                        sx={{margin: 1}}
-                        variant="contained"
-                        startIcon={<AddTwoToneIcon fontSize="small"/>}
-                    >
-                      Change password
-                    </Button>
-                  </div>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+          {isUserAdmin && (
+            <Grid item xs={12}>
+              <Card>
+                <CardHeader title="Change Password" />
+                <Divider />
+                <CardContent>
+                  <Box
+                      component="form"
+                      sx={{
+                        '& .MuiTextField-root': {m: 1, width: '25ch'}
+                      }}
+                      noValidate
+                      autoComplete="off"
+                  >
+                    <div>
+                      <TextField
+                          id="outlined-password-input"
+                          label="Old password"
+                          type="password"
+                      />
+                      <TextField
+                          id="outlined-password-input"
+                          label="New password"
+                          type="password"
+                      />
+                      <TextField
+                          required
+                          id="outlined-password-input"
+                          label="Confirm"
+                          type="password"
+                      />
+                    </div>
+                    <div>
+                      <Button
+                          sx={{margin: 1}}
+                          variant="contained"
+                      >
+                        Change Password
+                      </Button>
+                    </div>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          )}
         </Grid>
+
       </Container>
       <Footer />
     </>
