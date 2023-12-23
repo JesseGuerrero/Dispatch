@@ -28,8 +28,8 @@
 - <s>Forgot Password</s> (Empty endpoints)
 - <s>Broadcast</s> (Empty endpoints)
   - Send by tag and username (Empty endpoints)
-- Empty user, hide all but overview
-  - Make a user json that can be manipulated as empty or nonempty
+- <s>Empty user, hide all but overview</s>
+  - <s>Make a user json that can be manipulated as empty or nonempty</s>
 - Create user login
 - Create user register
 - Create user forgot password
