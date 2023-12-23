@@ -26,9 +26,14 @@
 - <s>Register</s> (With backend)
 - <s>Logout</s> (With backend)
 - <s>Forgot Password</s> (Empty endpoints)
-- Broadcast (Empty endpoints)
+- <s>Broadcast</s> (Empty endpoints)
   - Send by tag and username (Empty endpoints)
-- Settings (Empty endpoints) <br>
+- Empty user, hide all but overview
+  - Make a user json that can be manipulated as empty or nonempty
+- Create user login
+- Create user register
+- Create user forgot password
+- User Settings (Empty endpoints) <br>
   ![Settings](https://i.imgur.com/7pQwyuk.png)
 - Temp (Empty endpoints) <br>
   ![Temp](https://i.imgur.com/8hmCWqB.png)
