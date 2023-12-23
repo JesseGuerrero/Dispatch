@@ -33,22 +33,54 @@
 - <s>Create user login</s>
 - <s>Create user register</s>
 - <s>Create user forgot password</s>
-- User Settings (Empty endpoints) <br>
+- <s>User Settings (Empty endpoints)</s><br>
   ![Settings](https://i.imgur.com/7pQwyuk.png)
-- Temp (Empty endpoints) <br>
-  ![Temp](https://i.imgur.com/8hmCWqB.png)
-- Scheduler by tag (Empty endpoints)
+- Create tags json according to Mongo, use context
+```JSON
+{
+  "tags": [
+    {
+      "name": "tag1",
+      "emails": [
+        "email1",
+        "email2"
+      ]
+    },
+    {
+      "name": "tag2",
+      "emails": [
+        "email1",
+        "email2"
+      ]
+    }
+  ]
+}
+```
+- Create email-list json according to Mongo, use context
+```JSON
+[
+  {
+    "email": "email1",
+    "firstName": "firstName1"
+  },
+  {
+    "email": "email2",
+    "firstName": "firstName2"
+  }
+]
+```
 - Manage Subscribers (Make interactive without backend, use empty endpoints)
   - View Subscribers
   - Add Subscriber (all empty here...)
   - Edit Subscriber
   - Delete Subscriber
-  - View Subscriber Statistics
+  - View Subscriber Statistics (Do this one later, but keep the button)
   - Add empty tag
   - Add email to tags
   - Remove email from tags
   - Delete tag
-- Delete test page
+- Scheduler by tag (Empty endpoints)
+- Create course json according to Mongo, use context
 - Manage Courses (empty endpoints)
 - Email writer
   - Writer
