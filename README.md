@@ -30,9 +30,9 @@
   - Send by tag and username (Empty endpoints)
 - <s>Empty user, hide all but overview</s>
   - <s>Make a user json that can be manipulated as empty or nonempty</s>
-- Create user login
-- Create user register
-- Create user forgot password
+- <s>Create user login</s>
+- <s>Create user register</s>
+- <s>Create user forgot password</s>
 - User Settings (Empty endpoints) <br>
   ![Settings](https://i.imgur.com/7pQwyuk.png)
 - Temp (Empty endpoints) <br>
