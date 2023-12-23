@@ -96,6 +96,17 @@ function HeaderMenu() {
               primary="Choose User"
             />
           </ListItem>
+          <ListItem
+            classes={{ root: 'MuiListItem-indicators' }}
+            button
+            component={NavLink}
+            to="choose-user"
+          >
+            <ListItemText
+              primaryTypographyProps={{ noWrap: true }}
+              primary="Logout User"
+            />
+          </ListItem>
         </List>
       </ListWrapper>
       <Menu anchorEl={ref.current} onClose={handleClose} open={isOpen}>
