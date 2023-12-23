@@ -1,4 +1,4 @@
-import {useContext, useRef, useState} from 'react';
+import {useContext, useEffect, useRef, useState} from 'react';
 
 import { NavLink } from 'react-router-dom';
 
@@ -64,6 +64,11 @@ function HeaderUserbox() {
 
   const ref = useRef<any>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsUserLoggedIn(user.name !== "");
+  }, [user.name]);
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -117,14 +122,16 @@ function HeaderUserbox() {
           {/*  <AccountBoxTwoToneIcon fontSize="small" />*/}
           {/*  <ListItemText primary="My Profile" />*/}
           {/*</ListItem>*/}
-          <ListItem
-            button
-            to="settings"
-            component={NavLink}
-          >
-            <AccountTreeTwoToneIcon fontSize="small" />
-            <ListItemText primary="Settings" />
-          </ListItem>
+          {isUserLoggedIn && (
+              <ListItem
+                  button
+                  to="settings"
+                  component={NavLink}
+              >
+                <AccountTreeTwoToneIcon fontSize="small" />
+                <ListItemText primary="Settings" />
+              </ListItem>
+          )}
         </List>
         <Divider />
         <Box sx={{ m: 1 }}>

@@ -100,7 +100,7 @@ function HeaderMenu() {
             classes={{ root: 'MuiListItem-indicators' }}
             button
             component={NavLink}
-            to="choose-user"
+            to="overview"
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
