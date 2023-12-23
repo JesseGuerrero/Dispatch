@@ -30,8 +30,8 @@ export const SidebarProvider: FC = ({ children }) => {
     setSidebarToggle(false);
   };
   const user = {
-    avatar: '/static/images/avatars/1.jpg',
-    name: 'Admin',
+    avatar: '',
+    name: '',
   };
 
   const newsletter = {

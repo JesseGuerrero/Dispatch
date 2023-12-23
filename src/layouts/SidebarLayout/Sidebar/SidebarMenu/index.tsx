@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import {useContext, useEffect, useState} from 'react';
 
 import {
   ListSubheader,
@@ -175,7 +175,12 @@ const SubMenuWrapper = styled(Box)(
 );
 
 function SidebarMenu() {
-  const { closeSidebar } = useContext(SidebarContext);
+  const { closeSidebar, user } = useContext(SidebarContext);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsUserLoggedIn(user.name !== "");
+  }, [user.name]);
 
   return (
     <>
@@ -194,272 +199,277 @@ function SidebarMenu() {
                   Overview
                 </Button>
               </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="broadcast"
-                  startIcon={<DesignServicesTwoToneIcon />}
-                >
-                  Broadcast
-                </Button>
-              </ListItem>
+              {isUserLoggedIn && (
+                <ListItem component="div">
+                  <Button
+                    disableRipple
+                    component={RouterLink}
+                    onClick={closeSidebar}
+                    to="broadcast"
+                    startIcon={<DesignServicesTwoToneIcon />}
+                  >
+                    Broadcast
+                  </Button>
+                </ListItem>
+              )}
             </List>
           </SubMenuWrapper>
         </List>
-        <List
-            component="div"
-            subheader={
-              <ListSubheader component="div" disableSticky>
-                Write Email
-              </ListSubheader>
-            }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="create-email"
-                    startIcon={<BrightnessLowTwoToneIcon />}
-                >
-                  Create Email
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="edit-email"
-                    startIcon={<MmsTwoToneIcon />}
-                >
-                  Edit Email
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="delete-email"
-                    startIcon={<MmsTwoToneIcon />}
-                >
-                  Delete Email
-                </Button>
-              </ListItem>
+        {isUserLoggedIn && (
+          <>
+            <List
+                component="div"
+                subheader={
+                  <ListSubheader component="div" disableSticky>
+                    Write Email
+                  </ListSubheader>
+                }
+            >
+              <SubMenuWrapper>
+                <List component="div">
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="create-email"
+                        startIcon={<BrightnessLowTwoToneIcon />}
+                    >
+                      Create Email
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="edit-email"
+                        startIcon={<MmsTwoToneIcon />}
+                    >
+                      Edit Email
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="delete-email"
+                        startIcon={<MmsTwoToneIcon />}
+                    >
+                      Delete Email
+                    </Button>
+                  </ListItem>
+                </List>
+              </SubMenuWrapper>
             </List>
-          </SubMenuWrapper>
-        </List>
-        <List
-            component="div"
-            subheader={
-              <ListSubheader component="div" disableSticky>
-                Manage Scheduler
-              </ListSubheader>
-            }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="schedule-email"
-                    startIcon={<BrightnessLowTwoToneIcon />}
-                >
-                  Schedule Email
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="edit-schedule"
-                    startIcon={<MmsTwoToneIcon />}
-                >
-                  Edit Schedule
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="delete-schedule"
-                    startIcon={<MmsTwoToneIcon />}
-                >
-                  Delete Schedule
-                </Button>
-              </ListItem>
+            <List
+                component="div"
+                subheader={
+                  <ListSubheader component="div" disableSticky>
+                    Manage Scheduler
+                  </ListSubheader>
+                }
+            >
+              <SubMenuWrapper>
+                <List component="div">
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="schedule-email"
+                        startIcon={<BrightnessLowTwoToneIcon />}
+                    >
+                      Schedule Email
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="edit-schedule"
+                        startIcon={<MmsTwoToneIcon />}
+                    >
+                      Edit Schedule
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="delete-schedule"
+                        startIcon={<MmsTwoToneIcon />}
+                    >
+                      Delete Schedule
+                    </Button>
+                  </ListItem>
+                </List>
+              </SubMenuWrapper>
             </List>
-          </SubMenuWrapper>
-        </List>
-        <List
-            component="div"
-            subheader={
-              <ListSubheader component="div" disableSticky>
-                Manage Courses
-              </ListSubheader>
-            }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="create-course"
-                    startIcon={<BrightnessLowTwoToneIcon />}
-                >
-                  Create Course
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="edit-course"
-                    startIcon={<MmsTwoToneIcon />}
-                >
-                  Edit Course
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="delete-course"
-                    startIcon={<MmsTwoToneIcon />}
-                >
-                  Delete Course
-                </Button>
-              </ListItem>
+            <List
+                component="div"
+                subheader={
+                  <ListSubheader component="div" disableSticky>
+                    Manage Courses
+                  </ListSubheader>
+                }
+            >
+              <SubMenuWrapper>
+                <List component="div">
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="create-course"
+                        startIcon={<BrightnessLowTwoToneIcon />}
+                    >
+                      Create Course
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="edit-course"
+                        startIcon={<MmsTwoToneIcon />}
+                    >
+                      Edit Course
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="delete-course"
+                        startIcon={<MmsTwoToneIcon />}
+                    >
+                      Delete Course
+                    </Button>
+                  </ListItem>
+                </List>
+              </SubMenuWrapper>
             </List>
-          </SubMenuWrapper>
-        </List>
-        <List
-          component="div"
-          subheader={
-            <ListSubheader component="div" disableSticky>
-              Manage Newsletter
-            </ListSubheader>
-          }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="view-subscribers"
-                  startIcon={<BrightnessLowTwoToneIcon />}
-                >
-                  Subscribers
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="add-subscribers"
-                    startIcon={<BrightnessLowTwoToneIcon />}
-                >
-                  Add Subscriber
-                </Button>
-              </ListItem>
+            <List
+              component="div"
+              subheader={
+                <ListSubheader component="div" disableSticky>
+                  Manage Newsletter
+                </ListSubheader>
+              }
+            >
+              <SubMenuWrapper>
+                <List component="div">
+                  <ListItem component="div">
+                    <Button
+                      disableRipple
+                      component={RouterLink}
+                      onClick={closeSidebar}
+                      to="view-subscribers"
+                      startIcon={<BrightnessLowTwoToneIcon />}
+                    >
+                      Subscribers
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="add-subscribers"
+                        startIcon={<BrightnessLowTwoToneIcon />}
+                    >
+                      Add Subscriber
+                    </Button>
+                  </ListItem>
 
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="edit-subscribers"
-                  startIcon={<MmsTwoToneIcon />}
-                >
-                  Edit subscriber
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="delete-subscriber"
-                  startIcon={<BrightnessLowTwoToneIcon />}
-                >
-                  Delete Subscriber
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="subscriber-statistics"
-                  startIcon={<BrightnessLowTwoToneIcon />}
-                >
-                  Subscriber Statistics
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="add-tag"
-                    startIcon={<BrightnessLowTwoToneIcon />}
-                >
-                  Add tag
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="add-email-to-tag"
-                  startIcon={<MmsTwoToneIcon />}
-                >
-                  Add email to tag
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="remove-email-from-tags"
-                  startIcon={<MmsTwoToneIcon />}
-                >
-                  Remove email from tags
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="delete-tag"
-                  startIcon={<MmsTwoToneIcon />}
-                >
-                  Delete tag
-                </Button>
-              </ListItem>
+                  <ListItem component="div">
+                    <Button
+                      disableRipple
+                      component={RouterLink}
+                      onClick={closeSidebar}
+                      to="edit-subscribers"
+                      startIcon={<MmsTwoToneIcon />}
+                    >
+                      Edit subscriber
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                      disableRipple
+                      component={RouterLink}
+                      onClick={closeSidebar}
+                      to="delete-subscriber"
+                      startIcon={<BrightnessLowTwoToneIcon />}
+                    >
+                      Delete Subscriber
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                      disableRipple
+                      component={RouterLink}
+                      onClick={closeSidebar}
+                      to="subscriber-statistics"
+                      startIcon={<BrightnessLowTwoToneIcon />}
+                    >
+                      Subscriber Statistics
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="add-tag"
+                        startIcon={<BrightnessLowTwoToneIcon />}
+                    >
+                      Add tag
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                      disableRipple
+                      component={RouterLink}
+                      onClick={closeSidebar}
+                      to="add-email-to-tag"
+                      startIcon={<MmsTwoToneIcon />}
+                    >
+                      Add email to tag
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                      disableRipple
+                      component={RouterLink}
+                      onClick={closeSidebar}
+                      to="remove-email-from-tags"
+                      startIcon={<MmsTwoToneIcon />}
+                    >
+                      Remove email from tags
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                      disableRipple
+                      component={RouterLink}
+                      onClick={closeSidebar}
+                      to="delete-tag"
+                      startIcon={<MmsTwoToneIcon />}
+                    >
+                      Delete tag
+                    </Button>
+                  </ListItem>
+                </List>
+              </SubMenuWrapper>
             </List>
-          </SubMenuWrapper>
-        </List>
-
+          </>
+        )}
       </MenuWrapper>
     </>
   );
