@@ -22,7 +22,7 @@ import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
-import {SidebarContext} from "../../../../contexts/SidebarContext";
+import {NewsletterContext} from "../../../../contexts/NewsletterContext";
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -60,7 +60,7 @@ const UserBoxDescription = styled(Typography)(
 );
 
 function HeaderUserbox() {
-  const { user, newsletter } = useContext(SidebarContext);
+  const { user, newsletter } = useContext(NewsletterContext);
 
   const ref = useRef<any>(null);
   const [isOpen, setOpen] = useState<boolean>(false);

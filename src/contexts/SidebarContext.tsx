@@ -1,19 +1,9 @@
 import { FC, useState, createContext } from 'react';
-type User = {
-  avatar: string;
-  name: string;
-};
-
-type Newsletter = {
-  title: string;
-};
 
 type SidebarContext = {
   sidebarToggle: any;
   toggleSidebar: () => void;
   closeSidebar: () => void;
-  user: User;
-  newsletter: Newsletter;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
@@ -29,17 +19,9 @@ export const SidebarProvider: FC = ({ children }) => {
   const closeSidebar = () => {
     setSidebarToggle(false);
   };
-  const user = {
-    avatar: '',
-    name: 'Jesse',
-  };
-
-  const newsletter = {
-    title: 'Newsletter1'
-  }
   return (
     <SidebarContext.Provider
-      value={{ sidebarToggle, toggleSidebar, closeSidebar, user, newsletter }}
+      value={{ sidebarToggle, toggleSidebar, closeSidebar }}
     >
       {children}
     </SidebarContext.Provider>

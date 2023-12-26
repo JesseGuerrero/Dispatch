@@ -15,48 +15,11 @@ import Footer from 'src/components/Footer';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import { pink } from '@mui/material/colors';
-import Checkbox from '@mui/material/Checkbox';
 
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-
-import Stack from '@mui/material/Stack';
-import Slider from '@mui/material/Slider';
-import VolumeDown from '@mui/icons-material/VolumeDown';
-import VolumeUp from '@mui/icons-material/VolumeUp';
-
-import Switch from '@mui/material/Switch';
-import AddTwoToneIcon from "@mui/icons-material/AddTwoTone";
-import {SidebarContext} from "../../../../contexts/SidebarContext";
-
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
-
-const currencies = [
-  {
-    value: 'USD',
-    label: '$'
-  },
-  {
-    value: 'EUR',
-    label: '€'
-  },
-  {
-    value: 'BTC',
-    label: '฿'
-  },
-  {
-    value: 'JPY',
-    label: '¥'
-  }
-];
+import {NewsletterContext} from "../../../../contexts/NewsletterContext";
 
 function ChooseUser() {
-  const { user } = useContext(SidebarContext);
+  const { user } = useContext(NewsletterContext);
   const [isUserAdmin, setIsUserAdmin] = useState<boolean>(false);
 
 

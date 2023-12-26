@@ -71,9 +71,13 @@
 ```
 - Manage Subscribers (Make interactive without backend, use empty endpoints)
   - View Subscribers
+    - Do transaction list with tags & courses, sort backend side with pagination later
+    - Delete here too
   - Add Subscriber (all empty here...)
+    - Simple add email and first name form
   - Edit Subscriber
-  - Delete Subscriber
+    - Same as view subscriber but tags and courses are editable
+  - Delete Subscriber (Delete this)
   - View Subscriber Statistics (Do this one later, but keep the button)
   - Add empty tag
   - Add email to tags
