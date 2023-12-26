@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState } from 'react';
+import {FC, ChangeEvent, useState, useContext} from 'react';
 import { format } from 'date-fns';
 import numeral from 'numeral';
 import PropTypes from 'prop-types';
@@ -30,125 +30,40 @@ import { CryptoOrder, CryptoOrderStatus } from 'src/models/crypto_order';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
+import {NewsletterContext} from "../../../../contexts/NewsletterContext";
 
-interface RecentOrdersTableProps {
-  className?: string;
-  cryptoOrders: CryptoOrder[];
-}
-
-interface Filters {
-  status?: CryptoOrderStatus;
-}
-
-const getStatusLabel = (cryptoOrderStatus: CryptoOrderStatus): JSX.Element => {
-  const map = {
-    failed: {
-      text: 'Failed',
-      color: 'error'
-    },
-    completed: {
-      text: 'Completed',
-      color: 'success'
-    },
-    pending: {
-      text: 'Pending',
-      color: 'warning'
-    }
-  };
-
-  const { text, color }: any = map[cryptoOrderStatus];
-
-  return <Label color={color}>{text}</Label>;
-};
-
-const applyFilters = (
-  cryptoOrders: CryptoOrder[],
-  filters: Filters
-): CryptoOrder[] => {
-  return cryptoOrders.filter((cryptoOrder) => {
-    let matches = true;
-
-    if (filters.status && cryptoOrder.status !== filters.status) {
-      matches = false;
-    }
-
-    return matches;
-  });
-};
-
-const applyPagination = (
-  cryptoOrders: CryptoOrder[],
-  page: number,
-  limit: number
-): CryptoOrder[] => {
-  return cryptoOrders.slice(page * limit, page * limit + limit);
-};
-
-const ViewSubscribersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
-  const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
+const ViewSubscribersTable: FC = () => {
+  const { subscribers } = useContext(NewsletterContext);
+  const emails = Object.keys(subscribers)
+  const [selectedSubscribers, setSelectedSubscribers] = useState<string[]>(
     []
   );
-  const selectedBulkActions = selectedCryptoOrders.length > 0;
+  const selectedBulkActions = selectedSubscribers.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
-  const [filters, setFilters] = useState<Filters>({
-    status: null
-  });
 
-  const statusOptions = [
-    {
-      id: 'all',
-      name: 'All'
-    },
-    {
-      id: 'completed',
-      name: 'Completed'
-    },
-    {
-      id: 'pending',
-      name: 'Pending'
-    },
-    {
-      id: 'failed',
-      name: 'Failed'
-    }
-  ];
-
-  const handleStatusChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    let value = null;
-
-    if (e.target.value !== 'all') {
-      value = e.target.value;
-    }
-
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      status: value
-    }));
-  };
-
-  const handleSelectAllCryptoOrders = (
+  const handleSelectAllSubscribers = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
-    setSelectedCryptoOrders(
+    setSelectedSubscribers(
       event.target.checked
-        ? cryptoOrders.map((cryptoOrder) => cryptoOrder.id)
+        ? emails
         : []
     );
   };
 
-  const handleSelectOneCryptoOrder = (
+  const handleSelectOneSubscriber = (
     event: ChangeEvent<HTMLInputElement>,
-    cryptoOrderId: string
+    emailKey: string
   ): void => {
-    if (!selectedCryptoOrders.includes(cryptoOrderId)) {
-      setSelectedCryptoOrders((prevSelected) => [
+    if (!selectedSubscribers.includes(emailKey)) {
+      setSelectedSubscribers((prevSelected) => [
         ...prevSelected,
-        cryptoOrderId
+        emailKey
       ]);
     } else {
-      setSelectedCryptoOrders((prevSelected) =>
-        prevSelected.filter((id) => id !== cryptoOrderId)
+      setSelectedSubscribers((prevSelected) =>
+        prevSelected.filter((key) => key !== emailKey)
       );
     }
   };
@@ -161,17 +76,11 @@ const ViewSubscribersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     setLimit(parseInt(event.target.value));
   };
 
-  const filteredCryptoOrders = applyFilters(cryptoOrders, filters);
-  const paginatedCryptoOrders = applyPagination(
-    filteredCryptoOrders,
-    page,
-    limit
-  );
   const selectedSomeCryptoOrders =
-    selectedCryptoOrders.length > 0 &&
-    selectedCryptoOrders.length < cryptoOrders.length;
+    selectedSubscribers.length > 0 &&
+    selectedSubscribers.length < emails.length;
   const selectedAllCryptoOrders =
-    selectedCryptoOrders.length === cryptoOrders.length;
+    selectedSubscribers.length === emails.length;
   const theme = useTheme();
 
   return (
@@ -183,25 +92,6 @@ const ViewSubscribersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
       )}
       {!selectedBulkActions && (
         <CardHeader
-          action={
-            <Box width={150}>
-              <FormControl fullWidth variant="outlined">
-                <InputLabel>Status</InputLabel>
-                <Select
-                  value={filters.status || 'all'}
-                  onChange={handleStatusChange}
-                  label="Status"
-                  autoWidth
-                >
-                  {statusOptions.map((statusOption) => (
-                    <MenuItem key={statusOption.id} value={statusOption.id}>
-                      {statusOption.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
-          }
           title="Subscribers"
         />
       )}
@@ -215,35 +105,48 @@ const ViewSubscribersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                   color="primary"
                   checked={selectedAllCryptoOrders}
                   indeterminate={selectedSomeCryptoOrders}
-                  onChange={handleSelectAllCryptoOrders}
+                  onChange={handleSelectAllSubscribers}
                 />
               </TableCell>
-              <TableCell>Firstname</TableCell>
               <TableCell>Email</TableCell>
+              <TableCell>First Name</TableCell>
               <TableCell>Tags</TableCell>
               <TableCell align="left">Courses</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedCryptoOrders.map((cryptoOrder) => {
-              const isCryptoOrderSelected = selectedCryptoOrders.includes(
-                cryptoOrder.id
+            {emails.map((email) => {
+              const subscriber = subscribers[email];
+              const isSubscriberSelected = selectedSubscribers.includes(
+                  email
               );
+              const tagsLine: string[] = subscriber.tags.reduce((acc, current, index) => {
+                if (index % 3 === 0) {
+                  acc.push(subscriber.tags.slice(index, index + 3).join(", "));
+                }
+                return acc;
+              }, []);
+              const coursesLine: string[] = subscriber.courses.reduce((acc, current, index) => {
+                if (index % 3 === 0) {
+                  acc.push(subscriber.courses.slice(index, index + 3).join(", "));
+                }
+                return acc;
+              }, []);
               return (
                 <TableRow
                   hover
-                  key={cryptoOrder.id}
-                  selected={isCryptoOrderSelected}
+                  key={email}
+                  selected={isSubscriberSelected}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
                       color="primary"
-                      checked={isCryptoOrderSelected}
+                      checked={isSubscriberSelected}
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneCryptoOrder(event, cryptoOrder.id)
+                        handleSelectOneSubscriber(event, email)
                       }
-                      value={isCryptoOrderSelected}
+                      value={isSubscriberSelected}
                     />
                   </TableCell>
                   <TableCell>
@@ -254,10 +157,7 @@ const ViewSubscribersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.orderDetails}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {format(cryptoOrder.orderDate, 'MMMM dd yyyy')}
+                      {email}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -268,39 +168,34 @@ const ViewSubscribersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.orderID}
+                      {subscriber.firstName}
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {cryptoOrder.sourceName}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {cryptoOrder.sourceDesc}
-                    </Typography>
+                    {tagsLine.map((tagLine) => (
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        {tagLine}
+                      </Typography>
+                    ))}
                   </TableCell>
                   <TableCell align="left">
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {cryptoOrder.amountCrypto}
-                      {cryptoOrder.cryptoCurrency}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {numeral(cryptoOrder.amount).format(
-                        `${cryptoOrder.currency}0,0.00`
-                      )}
-                    </Typography>
+                    {coursesLine.map((courseLine) => (
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        {courseLine}
+                      </Typography>
+                    ))}
                   </TableCell>
                   <TableCell align="right">
                     <Tooltip title="Edit Order" arrow>
@@ -339,7 +234,7 @@ const ViewSubscribersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
       <Box p={2}>
         <TablePagination
           component="div"
-          count={filteredCryptoOrders.length}
+          count={emails.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -352,11 +247,11 @@ const ViewSubscribersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 };
 
 ViewSubscribersTable.propTypes = {
-  cryptoOrders: PropTypes.array.isRequired
+  emails: PropTypes.array.isRequired
 };
 
 ViewSubscribersTable.defaultProps = {
-  cryptoOrders: []
+  emails: []
 };
 
 export default ViewSubscribersTable;
