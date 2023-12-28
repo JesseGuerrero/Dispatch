@@ -54,13 +54,13 @@ function AddSubscriber() {
                     <TextField
                         required
                         id="outlined-required"
-                        label="Required"
+                        label="First Name"
                         placeholder="First Name"
                     />
                     <TextField
                         required
                         id="outlined-required"
-                        label="Required"
+                        label="Email"
                         placeholder="Email"
                     />
                   </div>

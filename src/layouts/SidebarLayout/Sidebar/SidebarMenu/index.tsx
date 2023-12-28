@@ -390,21 +390,21 @@ function SidebarMenu() {
                       disableRipple
                       component={RouterLink}
                       onClick={closeSidebar}
-                      to="delete-subscriber"
-                      startIcon={<BrightnessLowTwoToneIcon />}
-                    >
-                      Delete Subscriber
-                    </Button>
-                  </ListItem>
-                  <ListItem component="div">
-                    <Button
-                      disableRipple
-                      component={RouterLink}
-                      onClick={closeSidebar}
                       to="subscriber-statistics"
                       startIcon={<BrightnessLowTwoToneIcon />}
                     >
                       Subscriber Statistics
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="view-tags"
+                        startIcon={<MmsTwoToneIcon />}
+                    >
+                      Tags
                     </Button>
                   </ListItem>
                   <ListItem component="div">
@@ -426,7 +426,7 @@ function SidebarMenu() {
                       to="add-email-to-tag"
                       startIcon={<MmsTwoToneIcon />}
                     >
-                      Add email to tag
+                      Add emails to tags
                     </Button>
                   </ListItem>
                   <ListItem component="div">
@@ -437,18 +437,7 @@ function SidebarMenu() {
                       to="remove-email-from-tags"
                       startIcon={<MmsTwoToneIcon />}
                     >
-                      Remove email from tags
-                    </Button>
-                  </ListItem>
-                  <ListItem component="div">
-                    <Button
-                      disableRipple
-                      component={RouterLink}
-                      onClick={closeSidebar}
-                      to="delete-tag"
-                      startIcon={<MmsTwoToneIcon />}
-                    >
-                      Delete tag
+                      Remove emails from tags
                     </Button>
                   </ListItem>
                 </List>

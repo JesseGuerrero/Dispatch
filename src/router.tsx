@@ -40,11 +40,11 @@ const AddEmailToTag = Loader(lazy(() => import('src/content/application/managene
 const AddSubscribers = Loader(lazy(() => import('src/content/application/managenewsletter/addsubscriber')));
 const AddTag = Loader(lazy(() => import('src/content/application/managenewsletter/addtag')));
 const DeleteSubscriber = Loader(lazy(() => import('src/content/application/managenewsletter/deletesubscriber')));
-const DeleteTag = Loader(lazy(() => import('src/content/application/managenewsletter/deletetag')));
 const EditSubscribers = Loader(lazy(() => import('src/content/application/managenewsletter/editsubscriber')));
 const RemoveEmailFromTags = Loader(lazy(() => import('src/content/application/managenewsletter/removeemailfromtags')));
 const Subscribers = Loader(lazy(() => import('src/content/application/managenewsletter/subscribers')));
 const SubscriberStatistics = Loader(lazy(() => import('src/content/application/managenewsletter/subscriberstatistics')));
+const Tags = Loader(lazy(() => import('src/content/application/managenewsletter/tags')));
 
 //Manage Scheduler
 const DeleteSchedule = Loader(lazy(() => import('src/content/application/managescheduler/deleteschedule')));
@@ -186,12 +186,8 @@ const routes: RouteObject[] = [
             element: <AddTag />
           },
           {
-            path: 'delete-subscriber',
-            element: <DeleteSubscriber />
-          },
-          {
-            path: 'delete-tag',
-            element: <DeleteTag />
+            path: 'view-tags',
+            element: <Tags />
           },
           {
             path: 'edit-subscribers',

@@ -53,7 +53,7 @@ const currencies = [
   }
 ];
 
-function DeleteTag() {
+function ViewTag() {
   const [currency, setCurrency] = useState('EUR');
 
   const handleChange = (event) => {
@@ -479,4 +479,4 @@ function DeleteTag() {
   );
 }
 
-export default DeleteTag;
+export default ViewTag;

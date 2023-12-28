@@ -35,7 +35,7 @@
 - <s>Create user forgot password</s>
 - <s>User Settings (Empty endpoints)</s><br>
   ![Settings](https://i.imgur.com/7pQwyuk.png)
-- Create tags json according to Mongo, use context
+- <s>Create tags json according to Mongo, use context</s>
 ```JSON
 {
   "tags": [
@@ -56,7 +56,7 @@
   ]
 }
 ```
-- Create email-list json according to Mongo, use context
+- <s>Create email-list json according to Mongo, use context</s>
 ```JSON
 [
   {
@@ -70,13 +70,13 @@
 ]
 ```
 - Manage Subscribers (Make interactive without backend, use empty endpoints)
-  - View Subscribers
-    - Do transaction list with tags & courses, sort backend side with pagination later
-    - Delete here too
-  - Add Subscriber (all empty here...)
-    - Simple add email and first name form
-  - Edit Subscriber
-    - Same as view subscriber but tags and courses are editable
+  - <s>View Subscribers</s>
+    - <s>Do transaction list with tags & courses, sort backend side with pagination later</s>
+    - <s>Delete here too</s>
+  - <s>Add Subscriber</s> (all empty here...)
+    - <s>Simple add email and first name form</s>
+  - <s>Edit Subscriber</s>
+    - <s>Same as view subscriber but tags and courses are editable</s>
   - Delete Subscriber (Delete this)
   - View Subscriber Statistics (Do this one later, but keep the button)
   - Add empty tag
