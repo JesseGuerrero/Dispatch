@@ -15,6 +15,7 @@ import Footer from 'src/components/Footer';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import AddTwoToneIcon from "@mui/icons-material/AddTwoTone";
+import StyledTextareaAutosize from "../../../../components/EditableTextArea";
 
 function AddTag() {
   return (
@@ -39,7 +40,7 @@ function AddTag() {
           >
             <Grid item xs={12}>
               <Card>
-                <CardHeader title="New Subscriber" />
+                <CardHeader title="New Tags" />
                 <Divider />
                 <CardContent>
                   <Box
@@ -51,12 +52,11 @@ function AddTag() {
                       autoComplete="off"
                   >
                     <div>
-                      <TextField
-                          required
-                          id="outlined-required"
-                          label="Add Tag"
-                          placeholder="Add Tag"
-                      />
+                        <StyledTextareaAutosize
+                            minRows={3}
+                            placeholder="Tag Names"
+                            style={{width: '20%'}}
+                        />
                     </div>
                     <div>
                       <Button

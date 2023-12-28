@@ -16,16 +16,14 @@ import {
   TableContainer,
   Typography,
   useTheme,
-  CardHeader, TextareaAutosize
+  CardHeader
 } from '@mui/material';
 
-import SaveIcon from '@mui/icons-material/Save';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
 import {NewsletterContext} from "../../../../contexts/NewsletterContext";
-import StyledTextareaAutosize from "../../../../components/EditableTextArea";
 
-const EditSubscribersTable: FC = () => {
+const ViewTagsTable: FC = () => {
   const { subscribers } = useContext(NewsletterContext);
   const emails = Object.keys(subscribers)
   const [selectedSubscribers, setSelectedSubscribers] = useState<string[]>(
@@ -101,10 +99,10 @@ const EditSubscribersTable: FC = () => {
                   onChange={handleSelectAllSubscribers}
                 />
               </TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>First Name</TableCell>
-              <TableCell>Tags</TableCell>
-              <TableCell align="left">Courses</TableCell>
+              <TableCell>Tag</TableCell>
+              <TableCell>Empty</TableCell>
+              <TableCell>Empty</TableCell>
+              <TableCell align="left">Count</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -114,6 +112,18 @@ const EditSubscribersTable: FC = () => {
               const isSubscriberSelected = selectedSubscribers.includes(
                   email
               );
+              const tagsLine: string[] = subscriber.tags.reduce((acc, current, index) => {
+                if (index % 3 === 0) {
+                  acc.push(subscriber.tags.slice(index, index + 3).join(", "));
+                }
+                return acc;
+              }, []);
+              const coursesLine: string[] = subscriber.courses.reduce((acc, current, index) => {
+                if (index % 3 === 0) {
+                  acc.push(subscriber.courses.slice(index, index + 3).join(", "));
+                }
+                return acc;
+              }, []);
               return (
                 <TableRow
                   hover
@@ -142,35 +152,43 @@ const EditSubscribersTable: FC = () => {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <StyledTextareaAutosize
-                        value={subscriber.firstName}
-                    />
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {subscriber.firstName}
+                    </Typography>
                   </TableCell>
                   <TableCell>
-                      <StyledTextareaAutosize
-                          value={subscriber.tags.join(", ")}
-                      />
+                    {tagsLine.map((tagLine) => (
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        {tagLine}
+                      </Typography>
+                    ))}
                   </TableCell>
                   <TableCell align="left">
-                    <StyledTextareaAutosize
-                        value={subscriber.courses.join(", ")}
-                    />
+                    {coursesLine.map((courseLine) => (
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        {courseLine}
+                      </Typography>
+                    ))}
                   </TableCell>
                   <TableCell align="right">
-                    <Tooltip title="Save Edits" arrow>
-                      <IconButton
-                        sx={{
-                          '&:hover': {
-                            background: theme.colors.primary.lighter
-                          },
-                          color: theme.palette.primary.main
-                        }}
-                        color="inherit"
-                        size="small"
-                      >
-                        <SaveIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
                     <Tooltip title="Delete Order" arrow>
                       <IconButton
                         sx={{
@@ -205,12 +223,12 @@ const EditSubscribersTable: FC = () => {
   );
 };
 
-EditSubscribersTable.propTypes = {
+ViewTagsTable.propTypes = {
   emails: PropTypes.array.isRequired
 };
 
-EditSubscribersTable.defaultProps = {
+ViewTagsTable.defaultProps = {
   emails: []
 };
 
-export default EditSubscribersTable;
+export default ViewTagsTable;
