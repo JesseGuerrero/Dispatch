@@ -24,36 +24,37 @@ import BulkActions from './BulkActions';
 import {NewsletterContext} from "../../../../contexts/NewsletterContext";
 
 const ViewTagsTable: FC = () => {
-  const { subscribers } = useContext(NewsletterContext);
+  const { subscribers, tags } = useContext(NewsletterContext);
   const emails = Object.keys(subscribers)
-  const [selectedSubscribers, setSelectedSubscribers] = useState<string[]>(
+  const tagsList = Object.keys(tags)
+  const [selectedTags, setSelectedTags] = useState<string[]>(
     []
   );
-  const selectedBulkActions = selectedSubscribers.length > 0;
+  const selectedBulkActions = selectedTags.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
 
-  const handleSelectAllSubscribers = (
+  const handleSelectAllTags = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
-    setSelectedSubscribers(
+    setSelectedTags(
       event.target.checked
-        ? emails
+        ? tagsList
         : []
     );
   };
 
-  const handleSelectOneSubscriber = (
+  const handleSelectOneTag = (
     event: ChangeEvent<HTMLInputElement>,
     emailKey: string
   ): void => {
-    if (!selectedSubscribers.includes(emailKey)) {
-      setSelectedSubscribers((prevSelected) => [
+    if (!selectedTags.includes(emailKey)) {
+      setSelectedTags((prevSelected) => [
         ...prevSelected,
         emailKey
       ]);
     } else {
-      setSelectedSubscribers((prevSelected) =>
+      setSelectedTags((prevSelected) =>
         prevSelected.filter((key) => key !== emailKey)
       );
     }
@@ -67,11 +68,11 @@ const ViewTagsTable: FC = () => {
     setLimit(parseInt(event.target.value));
   };
 
-  const selectedSomeCryptoOrders =
-    selectedSubscribers.length > 0 &&
-    selectedSubscribers.length < emails.length;
+  const selectedSomeTags =
+    selectedTags.length > 0 &&
+    selectedTags.length < emails.length;
   const selectedAllCryptoOrders =
-    selectedSubscribers.length === emails.length;
+    selectedTags.length === emails.length;
   const theme = useTheme();
 
   return (
@@ -83,7 +84,7 @@ const ViewTagsTable: FC = () => {
       )}
       {!selectedBulkActions && (
         <CardHeader
-          title="Subscribers"
+          title="Tags"
         />
       )}
       <Divider />
@@ -95,49 +96,34 @@ const ViewTagsTable: FC = () => {
                 <Checkbox
                   color="primary"
                   checked={selectedAllCryptoOrders}
-                  indeterminate={selectedSomeCryptoOrders}
-                  onChange={handleSelectAllSubscribers}
+                  indeterminate={selectedSomeTags}
+                  onChange={handleSelectAllTags}
                 />
               </TableCell>
               <TableCell>Tag</TableCell>
-              <TableCell>Empty</TableCell>
-              <TableCell>Empty</TableCell>
               <TableCell align="left">Count</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {emails.map((email) => {
-              const subscriber = subscribers[email];
-              const isSubscriberSelected = selectedSubscribers.includes(
-                  email
+            {tagsList.map((tag) => {
+              const isTagSelected = selectedTags.includes(
+                  tag
               );
-              const tagsLine: string[] = subscriber.tags.reduce((acc, current, index) => {
-                if (index % 3 === 0) {
-                  acc.push(subscriber.tags.slice(index, index + 3).join(", "));
-                }
-                return acc;
-              }, []);
-              const coursesLine: string[] = subscriber.courses.reduce((acc, current, index) => {
-                if (index % 3 === 0) {
-                  acc.push(subscriber.courses.slice(index, index + 3).join(", "));
-                }
-                return acc;
-              }, []);
               return (
                 <TableRow
                   hover
-                  key={email}
-                  selected={isSubscriberSelected}
+                  key={tag}
+                  selected={isTagSelected}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
                       color="primary"
-                      checked={isSubscriberSelected}
+                      checked={isTagSelected}
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneSubscriber(event, email)
+                        handleSelectOneTag(event, tag)
                       }
-                      value={isSubscriberSelected}
+                      value={isTagSelected}
                     />
                   </TableCell>
                   <TableCell>
@@ -148,7 +134,7 @@ const ViewTagsTable: FC = () => {
                       gutterBottom
                       noWrap
                     >
-                      {email}
+                      {tag}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -159,34 +145,8 @@ const ViewTagsTable: FC = () => {
                       gutterBottom
                       noWrap
                     >
-                      {subscriber.firstName}
+                      {1}
                     </Typography>
-                  </TableCell>
-                  <TableCell>
-                    {tagsLine.map((tagLine) => (
-                      <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
-                        gutterBottom
-                        noWrap
-                      >
-                        {tagLine}
-                      </Typography>
-                    ))}
-                  </TableCell>
-                  <TableCell align="left">
-                    {coursesLine.map((courseLine) => (
-                      <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
-                        gutterBottom
-                        noWrap
-                      >
-                        {courseLine}
-                      </Typography>
-                    ))}
                   </TableCell>
                   <TableCell align="right">
                     <Tooltip title="Delete Order" arrow>

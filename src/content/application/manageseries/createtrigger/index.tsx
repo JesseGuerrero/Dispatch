@@ -53,7 +53,7 @@ const currencies = [
   }
 ];
 
-function CreateCourse() {
+function CreateTrigger() {
   const [currency, setCurrency] = useState('EUR');
 
   const handleChange = (event) => {
@@ -479,4 +479,4 @@ function CreateCourse() {
   );
 }
 
-export default CreateCourse;
+export default CreateTrigger;

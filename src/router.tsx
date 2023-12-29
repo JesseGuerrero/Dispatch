@@ -31,9 +31,10 @@ const Overview= Loader(lazy(() => import('src/content/application/main/overview'
 const Settings = Loader(lazy(() => import('src/content/application/main/settings')));
 
 //Manage Courses
-const CreateCourse = Loader(lazy(() => import('src/content/application/managecourses/createcourse')));
-const DeleteCourse = Loader(lazy(() => import('src/content/application/managecourses/deletecourse')));
-const EditCourse = Loader(lazy(() => import('src/content/application/managecourses/editcourse')));
+const CreateTrigger = Loader(lazy(() => import('src/content/application/manageseries/createtrigger')));
+const CreateSeries = Loader(lazy(() => import('src/content/application/manageseries/createseries')));
+const DeleteSeries = Loader(lazy(() => import('src/content/application/manageseries/deleteseries')));
+const EditSeries = Loader(lazy(() => import('src/content/application/manageseries/editseries')));
 
 //Manage Newsletter
 const AddEmailToTag = Loader(lazy(() => import('src/content/application/managenewsletter/addemailtotag')));
@@ -162,16 +163,20 @@ const routes: RouteObject[] = [
             element: <Settings />
           },
           {
-            path: 'create-course',
-            element: <CreateCourse />
+            path: 'create-trigger',
+            element: <CreateTrigger />
           },
           {
-            path: 'delete-course',
-            element: <DeleteCourse />
+            path: 'create-series',
+            element: <CreateSeries />
           },
           {
-            path: 'edit-course',
-            element: <EditCourse />
+            path: 'delete-series',
+            element: <DeleteSeries />
+          },
+          {
+            path: 'edit-series',
+            element: <EditSeries />
           },
           {
             path: 'add-email-to-tag',

@@ -77,12 +77,11 @@
     - <s>Simple add email and first name form</s>
   - <s>Edit Subscriber</s>
     - <s>Same as view subscriber but tags and courses are editable</s>
-  - Delete Subscriber (Delete this)
-  - View Subscriber Statistics (Do this one later, but keep the button)
-  - Add empty tag
-  - Add email to tags
-  - Remove email from tags
-  - Delete tag
+  - <s>Delete Subscriber</s> (Delete this)
+  - <s>Add empty tag</s>
+  - <s>Add email to tags</s>
+  - <s>Remove email from tags</s>
+  - <s>Delete tag</s>
 - Scheduler by tag (Empty endpoints)
 - Create course json according to Mongo, use context
 - Manage Courses (empty endpoints)

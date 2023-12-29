@@ -53,7 +53,7 @@ const currencies = [
   }
 ];
 
-function DeleteCourse() {
+function CreateSeries() {
   const [currency, setCurrency] = useState('EUR');
 
   const handleChange = (event) => {
@@ -479,4 +479,4 @@ function DeleteCourse() {
   );
 }
 
-export default DeleteCourse;
+export default CreateSeries;

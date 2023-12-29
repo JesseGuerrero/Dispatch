@@ -299,7 +299,7 @@ function SidebarMenu() {
                 component="div"
                 subheader={
                   <ListSubheader component="div" disableSticky>
-                    Manage Courses
+                    Manage Series
                   </ListSubheader>
                 }
             >
@@ -310,10 +310,10 @@ function SidebarMenu() {
                         disableRipple
                         component={RouterLink}
                         onClick={closeSidebar}
-                        to="create-course"
+                        to="create-trigger"
                         startIcon={<BrightnessLowTwoToneIcon />}
                     >
-                      Create Course
+                      Create Trigger
                     </Button>
                   </ListItem>
                   <ListItem component="div">
@@ -321,10 +321,10 @@ function SidebarMenu() {
                         disableRipple
                         component={RouterLink}
                         onClick={closeSidebar}
-                        to="edit-course"
-                        startIcon={<MmsTwoToneIcon />}
+                        to="create-series"
+                        startIcon={<BrightnessLowTwoToneIcon />}
                     >
-                      Edit Course
+                      Create Series
                     </Button>
                   </ListItem>
                   <ListItem component="div">
@@ -332,10 +332,21 @@ function SidebarMenu() {
                         disableRipple
                         component={RouterLink}
                         onClick={closeSidebar}
-                        to="delete-course"
+                        to="edit-series"
                         startIcon={<MmsTwoToneIcon />}
                     >
-                      Delete Course
+                      Edit Series
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="delete-series"
+                        startIcon={<MmsTwoToneIcon />}
+                    >
+                      Delete Series
                     </Button>
                   </ListItem>
                 </List>
@@ -385,17 +396,17 @@ function SidebarMenu() {
                       Edit subscriber
                     </Button>
                   </ListItem>
-                  <ListItem component="div">
-                    <Button
-                      disableRipple
-                      component={RouterLink}
-                      onClick={closeSidebar}
-                      to="subscriber-statistics"
-                      startIcon={<BrightnessLowTwoToneIcon />}
-                    >
-                      Subscriber Statistics
-                    </Button>
-                  </ListItem>
+                  {/*<ListItem component="div">*/}
+                  {/*  <Button*/}
+                  {/*    disableRipple*/}
+                  {/*    component={RouterLink}*/}
+                  {/*    onClick={closeSidebar}*/}
+                  {/*    to="subscriber-statistics"*/}
+                  {/*    startIcon={<BrightnessLowTwoToneIcon />}*/}
+                  {/*  >*/}
+                  {/*    Subscriber Statistics*/}
+                  {/*  </Button>*/}
+                  {/*</ListItem>*/}
                   <ListItem component="div">
                     <Button
                         disableRipple

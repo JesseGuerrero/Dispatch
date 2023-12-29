@@ -53,7 +53,7 @@ const currencies = [
   }
 ];
 
-function EditCourse() {
+function EditSeries() {
   const [currency, setCurrency] = useState('EUR');
 
   const handleChange = (event) => {
@@ -479,4 +479,4 @@ function EditCourse() {
   );
 }
 
-export default EditCourse;
+export default EditSeries;
