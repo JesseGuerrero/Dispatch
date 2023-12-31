@@ -26,6 +26,7 @@ const ForgotPasswordPage = Loader(lazy(() => import('src/content/auth/forgotpass
 
 // Main
 const Broadcast = Loader(lazy(() => import('src/content/application/main/broadcast')));
+const Calendar = Loader(lazy(() => import('src/content/application/main/calendar')));
 const ChooseUser = Loader(lazy(() => import('src/content/application/main/chooseuser')));
 const Overview= Loader(lazy(() => import('src/content/application/main/overview')));
 const Settings = Loader(lazy(() => import('src/content/application/main/settings')));
@@ -40,7 +41,6 @@ const EditSeries = Loader(lazy(() => import('src/content/application/manageserie
 const AddEmailToTag = Loader(lazy(() => import('src/content/application/managenewsletter/addemailtotag')));
 const AddSubscribers = Loader(lazy(() => import('src/content/application/managenewsletter/addsubscriber')));
 const AddTag = Loader(lazy(() => import('src/content/application/managenewsletter/addtag')));
-const DeleteSubscriber = Loader(lazy(() => import('src/content/application/managenewsletter/deletesubscriber')));
 const EditSubscribers = Loader(lazy(() => import('src/content/application/managenewsletter/editsubscriber')));
 const RemoveEmailFromTags = Loader(lazy(() => import('src/content/application/managenewsletter/removeemailfromtags')));
 const Subscribers = Loader(lazy(() => import('src/content/application/managenewsletter/subscribers')));
@@ -153,6 +153,10 @@ const routes: RouteObject[] = [
           {
             path: 'broadcast',
             element: <Broadcast />
+          },
+          {
+            path: 'calendar',
+            element: <Calendar />
           },
           {
             path: 'choose-user',

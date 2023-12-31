@@ -186,17 +186,30 @@ function SidebarMenu() {
                 </Button>
               </ListItem>
               {isUserLoggedIn && (
-                <ListItem component="div">
-                  <Button
-                    disableRipple
-                    component={RouterLink}
-                    onClick={closeSidebar}
-                    to="broadcast"
-                    startIcon={<DesignServicesTwoToneIcon />}
-                  >
-                    Broadcast
-                  </Button>
-                </ListItem>
+                <>
+                  <ListItem component="div">
+                    <Button
+                      disableRipple
+                      component={RouterLink}
+                      onClick={closeSidebar}
+                      to="broadcast"
+                      startIcon={<DesignServicesTwoToneIcon />}
+                    >
+                      Broadcast
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                      disableRipple
+                      component={RouterLink}
+                      onClick={closeSidebar}
+                      to="calendar"
+                      startIcon={<DesignServicesTwoToneIcon />}
+                    >
+                      Calendar
+                    </Button>
+                  </ListItem>
+                </>
               )}
             </List>
           </SubMenuWrapper>

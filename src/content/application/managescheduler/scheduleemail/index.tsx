@@ -15,12 +15,14 @@ import Footer from 'src/components/Footer';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import AddTwoToneIcon from "@mui/icons-material/AddTwoTone";
-import AdapterDateFns from '@mui/pickers/adapter/date-fns';
-import LocalizationProvider from '@mui/pickers/LocalizationProvider';
-import DatePicker from '@mui/pickers/DatePicker';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import React from "react";
 
 
 function ScheduleEmail() {
+  const [selectedDate, handleDateChange] = React.useState(new Date());
   return (
     <>
       <Helmet>
@@ -59,7 +61,6 @@ function ScheduleEmail() {
                       <DatePicker
                           value={selectedDate}
                           onChange={handleDateChange}
-                          renderInput={(props) => <TextField {...props} label="Select Date" />}
                       />
                     </LocalizationProvider>
                     <TextField
@@ -75,7 +76,7 @@ function ScheduleEmail() {
                         variant="contained"
                         startIcon={<AddTwoToneIcon fontSize="small"/>}
                     >
-                      Add subscriber
+                      Add to schedule
                     </Button>
                   </div>
                 </Box>
