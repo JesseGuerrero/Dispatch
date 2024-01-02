@@ -1,5 +1,27 @@
 import { FC, createContext } from 'react';
 
+
+type ScheduleItem = {
+    date: Date;
+    tag: string;
+    email: {
+        subject: string;
+        body: string;
+    };
+};
+
+
+type Course = {
+    courseName: string;
+    emails: {
+        subject: string;
+        body: string;
+    }[];
+    stages: {
+        [stage: string]: string[];
+    };
+};
+
 type subscribers = {
     [email: string]: {
         firstName: string;
@@ -26,6 +48,8 @@ type NewsletterContext = {
     newsletter: Newsletter;
     subscribers: subscribers;
     tags: tags;
+    schedule: ScheduleItem[];
+    courses: Course[];
 };
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
@@ -100,11 +124,83 @@ export const NewsletterProvider: FC = ({ children }) => {
             courses: ["course11", "course12", "course13", "course14", "course15", "course16", "course17", "course18", "course19", "course20"]
         }
     };
+    const schedule = [];
+    // Function to generate a random date within the next 365 days
+    function getRandomFutureDate() {
+        const currentDate = new Date();
+        const futureDate = new Date(currentDate);
+        futureDate.setDate(currentDate.getDate() + Math.floor(Math.random() * 365));
+        return futureDate;
+    }
+
+    // Function to generate random email subject and body
+    function getRandomEmailContent() {
+        const subjects = ["Meeting Reminder", "Important Update", "Event Notification"];
+        const bodies = ["Please be reminded of our upcoming meeting.", "Exciting news! Check out the latest updates.", "Don't miss out on the upcoming event."];
+
+        const randomSubject = subjects[Math.floor(Math.random() * subjects.length)];
+        const randomBody = bodies[Math.floor(Math.random() * bodies.length)];
+
+        return { subject: randomSubject, body: randomBody };
+    }
+
+    // Populate the schedule array with random future dates and properties
+    for (let i = 0; i < 5; i++) {
+        const randomDate = getRandomFutureDate();
+        const randomTag = `tagName${i + 1}`;
+        const randomEmailContent = getRandomEmailContent();
+
+        const event = {
+            date: randomDate,
+            tag: randomTag,
+            email: {
+                subject: randomEmailContent.subject,
+                body: randomEmailContent.body
+            }
+        };
+
+        schedule.push(event);
+    }
+
+    let courses = [
+        {
+            "courseName": "course1",
+            "emails": [
+                {
+                    "subject": "subject1",
+                    "body": "body1"
+                },
+                {
+                    "subject": "subject2",
+                    "body": "body2"
+                },
+                {
+                    "subject": "subject3",
+                    "body": "body3"
+                },
+                {
+                    "subject": "subject4",
+                    "body": "body4"
+                },
+                {
+                    "subject": "subject5",
+                    "body": "body5"
+                }
+            ],
+            "stages": {
+                "1": ["joe@email.com", "John@re.com"],
+                "2": ["go@email.com"],
+                "3": [],
+                "4": [],
+                "5": []
+            }
+        }
+    ]
 
 
     return (
         <NewsletterContext.Provider
-            value={{ user, newsletter, subscribers, tags }}
+            value={{ user, newsletter, subscribers, tags, schedule, courses }}
         >
             {children}
         </NewsletterContext.Provider>

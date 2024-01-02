@@ -83,6 +83,46 @@ function ScheduleEmail() {
               </CardContent>
             </Card>
           </Grid>
+        <Grid item xs={12}>
+            <Card>
+              <CardHeader title="New Scheduled By Tags" />
+              <Divider />
+              <CardContent>
+                <Box
+                    component="form"
+                    sx={{
+                      '& .MuiTextField-root': {m: 1, width: '25ch'}
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
+                  <div>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                          value={selectedDate}
+                          onChange={handleDateChange}
+                      />
+                    </LocalizationProvider>
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Tags"
+                        placeholder="Tags"
+                    />
+                  </div>
+                  <div>
+                    <Button
+                        sx={{margin: 1}}
+                        variant="contained"
+                        startIcon={<AddTwoToneIcon fontSize="small"/>}
+                    >
+                      Add to schedule
+                    </Button>
+                  </div>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
       </Container>
       <Footer/>

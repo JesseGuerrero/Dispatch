@@ -48,7 +48,6 @@ const SubscriberStatistics = Loader(lazy(() => import('src/content/application/m
 const Tags = Loader(lazy(() => import('src/content/application/managenewsletter/tags')));
 
 //Manage Scheduler
-const DeleteSchedule = Loader(lazy(() => import('src/content/application/managescheduler/deleteschedule')));
 const EditSchedule = Loader(lazy(() => import('src/content/application/managescheduler/editschedule')));
 const ScheduleEmail = Loader(lazy(() => import('src/content/application/managescheduler/scheduleemail')));
 
@@ -213,10 +212,6 @@ const routes: RouteObject[] = [
           {
             path: 'subscriber-statistics',
             element: <SubscriberStatistics />
-          },
-          {
-            path: 'delete-schedule',
-            element: <DeleteSchedule />
           },
           {
             path: 'edit-schedule',

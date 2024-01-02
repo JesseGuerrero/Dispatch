@@ -90,6 +90,7 @@
   - Preview
   - Templating
 
+*Create a mongo view for the calendar
 **--Write backend and security for all the above from top to bottom**
 
 *Write daemons in Spring Boot*
