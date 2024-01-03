@@ -24,8 +24,8 @@ import BulkActions from './BulkActions';
 import {NewsletterContext} from "../../../../contexts/NewsletterContext";
 
 const ViewTagsTable: FC = () => {
-  const { subscribers, tags } = useContext(NewsletterContext);
-  const emails = Object.keys(subscribers)
+  const { schedule, tags } = useContext(NewsletterContext);
+  const emails = Object.keys(schedule)
   const tagsList = Object.keys(tags)
   const [selectedTags, setSelectedTags] = useState<string[]>(
     []

@@ -83,6 +83,7 @@
   - <s>Remove email from tags</s>
   - <s>Delete tag</s>
 - Scheduler by tag (Empty endpoints)
+  - Make a date picker with default date from json
 - Create course json according to Mongo, use context
 - Manage Courses (empty endpoints)
 - Email writer

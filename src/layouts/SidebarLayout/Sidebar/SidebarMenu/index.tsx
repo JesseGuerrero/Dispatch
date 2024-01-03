@@ -186,7 +186,6 @@ function SidebarMenu() {
                 </Button>
               </ListItem>
               {isUserLoggedIn && (
-                <>
                   <ListItem component="div">
                     <Button
                       disableRipple
@@ -198,18 +197,19 @@ function SidebarMenu() {
                       Broadcast
                     </Button>
                   </ListItem>
-                  <ListItem component="div">
-                    <Button
+              )}
+              {isUserLoggedIn && (
+                <ListItem component="div">
+                  <Button
                       disableRipple
                       component={RouterLink}
                       onClick={closeSidebar}
                       to="calendar"
                       startIcon={<DesignServicesTwoToneIcon />}
-                    >
-                      Calendar
-                    </Button>
-                  </ListItem>
-                </>
+                  >
+                    Calendar
+                  </Button>
+                </ListItem>
               )}
             </List>
           </SubMenuWrapper>

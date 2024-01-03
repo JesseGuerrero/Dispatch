@@ -3,7 +3,7 @@ import { FC, createContext } from 'react';
 
 type ScheduleItem = {
     date: Date;
-    tag: string;
+    tag: string[];
     email: {
         subject: string;
         body: string;
@@ -147,15 +147,15 @@ export const NewsletterProvider: FC = ({ children }) => {
     // Populate the schedule array with random future dates and properties
     for (let i = 0; i < 5; i++) {
         const randomDate = getRandomFutureDate();
-        const randomTag = `tagName${i + 1}`;
+        const randomTag = [`tagName${i + 1}`];
         const randomEmailContent = getRandomEmailContent();
 
         const event = {
-            date: randomDate,
-            tag: randomTag,
-            email: {
-                subject: randomEmailContent.subject,
-                body: randomEmailContent.body
+            "date": randomDate,
+            "tag": randomTag,
+            "email": {
+                "subject": randomEmailContent.subject,
+                "body": randomEmailContent.body
             }
         };
 

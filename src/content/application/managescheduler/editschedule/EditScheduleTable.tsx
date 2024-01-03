@@ -26,37 +26,37 @@ import {NewsletterContext} from "../../../../contexts/NewsletterContext";
 import StyledTextareaAutosize from "../../../../components/EditableTextArea";
 
 const EditScheduleTable: FC = () => {
-  const { subscribers } = useContext(NewsletterContext);
-  const emails = Object.keys(subscribers)
-  const [selectedSubscribers, setSelectedSubscribers] = useState<string[]>(
+  const { schedule } = useContext(NewsletterContext);
+  const scheduleIndices = Array.from({ length: schedule.length -1 }, (_, index) => index + 1);
+  const [selectedSchedule, setSelectedSchedule] = useState<number[]>(
     []
   );
-  const selectedBulkActions = selectedSubscribers.length > 0;
+  const selectedBulkActions = selectedSchedule.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
 
-  const handleSelectAllSubscribers = (
+  const handleSelectAllSchedule = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
-    setSelectedSubscribers(
+    setSelectedSchedule(
       event.target.checked
-        ? emails
+        ? scheduleIndices
         : []
     );
   };
 
-  const handleSelectOneSubscriber = (
+  const handleSelectOneSchedule = (
     event: ChangeEvent<HTMLInputElement>,
-    emailKey: string
+    index: number
   ): void => {
-    if (!selectedSubscribers.includes(emailKey)) {
-      setSelectedSubscribers((prevSelected) => [
+    if (!selectedSchedule.includes(index)) {
+      setSelectedSchedule((prevSelected) => [
         ...prevSelected,
-        emailKey
+        index
       ]);
     } else {
-      setSelectedSubscribers((prevSelected) =>
-        prevSelected.filter((key) => key !== emailKey)
+      setSelectedSchedule((prevSelected) =>
+        prevSelected.filter((key) => key !== index)
       );
     }
   };
@@ -70,10 +70,10 @@ const EditScheduleTable: FC = () => {
   };
 
   const selectedSomeCryptoOrders =
-    selectedSubscribers.length > 0 &&
-    selectedSubscribers.length < emails.length;
+    selectedSchedule.length > 0 &&
+    selectedSchedule.length < scheduleIndices.length;
   const selectedAllCryptoOrders =
-    selectedSubscribers.length === emails.length;
+    selectedSchedule.length === scheduleIndices.length;
   const theme = useTheme();
 
   return (
@@ -85,7 +85,7 @@ const EditScheduleTable: FC = () => {
       )}
       {!selectedBulkActions && (
         <CardHeader
-          title="Subscribers"
+          title="Schedule"
         />
       )}
       <Divider />
@@ -98,36 +98,36 @@ const EditScheduleTable: FC = () => {
                   color="primary"
                   checked={selectedAllCryptoOrders}
                   indeterminate={selectedSomeCryptoOrders}
-                  onChange={handleSelectAllSubscribers}
+                  onChange={handleSelectAllSchedule}
                 />
               </TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>First Name</TableCell>
+              <TableCell>Subject</TableCell>
+              <TableCell>Date</TableCell>
               <TableCell>Tags</TableCell>
-              <TableCell align="left">Courses</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {emails.map((email) => {
-              const subscriber = subscribers[email];
-              const isSubscriberSelected = selectedSubscribers.includes(
-                  email
+            {scheduleIndices.map((index) => {
+              const event = schedule[index];
+              console.log(event)
+              const isEventSelected = selectedSchedule.includes(
+                  index
               );
               return (
                 <TableRow
                   hover
-                  key={email}
-                  selected={isSubscriberSelected}
+                  key={index}
+                  selected={isEventSelected}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
                       color="primary"
-                      checked={isSubscriberSelected}
+                      checked={isEventSelected}
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneSubscriber(event, email)
+                        handleSelectOneSchedule(event, index)
                       }
-                      value={isSubscriberSelected}
+                      value={isEventSelected}
                     />
                   </TableCell>
                   <TableCell>
@@ -138,23 +138,18 @@ const EditScheduleTable: FC = () => {
                       gutterBottom
                       noWrap
                     >
-                      {email}
+                      {event.email.subject}
                     </Typography>
                   </TableCell>
                   <TableCell>
                     <StyledTextareaAutosize
-                        value={subscriber.firstName}
+                        value={event.date.toString()}
                     />
                   </TableCell>
                   <TableCell>
                       <StyledTextareaAutosize
-                          value={subscriber.tags.join(", ")}
+                          value={event.tag.join(", ")}
                       />
-                  </TableCell>
-                  <TableCell align="left">
-                    <StyledTextareaAutosize
-                        value={subscriber.courses.join(", ")}
-                    />
                   </TableCell>
                   <TableCell align="right">
                     <Tooltip title="Save Edits" arrow>
@@ -193,7 +188,7 @@ const EditScheduleTable: FC = () => {
       <Box p={2}>
         <TablePagination
           component="div"
-          count={emails.length}
+          count={scheduleIndices.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
