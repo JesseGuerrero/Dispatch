@@ -16,47 +16,46 @@ import {
   TableContainer,
   Typography,
   useTheme,
-  CardHeader, TextareaAutosize
+  CardHeader
 } from '@mui/material';
 
-import SaveIcon from '@mui/icons-material/Save';
+import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
 import {NewsletterContext} from "../../../../contexts/NewsletterContext";
-import StyledTextareaAutosize from "../../../../components/EditableTextArea";
 
-const EditSubscribersTable: FC = () => {
+const ViewSeriesTable: FC = () => {
   const { courses } = useContext(NewsletterContext);
-  const emails = Object.keys(courses)
-  const [selectedSubscribers, setSelectedSubscribers] = useState<string[]>(
+  const courseIndices = Array.from({ length: courses.length -1 }, (_, index) => index + 1);
+  const [selectedCourses, setSelectedCourses] = useState<number[]>(
     []
   );
-  const selectedBulkActions = selectedSubscribers.length > 0;
+  const selectedBulkActions = selectedCourses.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
 
-  const handleSelectAllSubscribers = (
+  const handleSelectAllCourses = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
-    setSelectedSubscribers(
+    setSelectedCourses(
       event.target.checked
-        ? emails
+        ? courseIndices
         : []
     );
   };
 
   const handleSelectOneSubscriber = (
     event: ChangeEvent<HTMLInputElement>,
-    emailKey: string
+    index: number
   ): void => {
-    if (!selectedSubscribers.includes(emailKey)) {
-      setSelectedSubscribers((prevSelected) => [
+    if (!selectedCourses.includes(index)) {
+      setSelectedCourses((prevSelected) => [
         ...prevSelected,
-        emailKey
+        index
       ]);
     } else {
-      setSelectedSubscribers((prevSelected) =>
-        prevSelected.filter((key) => key !== emailKey)
+      setSelectedCourses((prevSelected) =>
+        prevSelected.filter((key) => key !== index)
       );
     }
   };
@@ -69,11 +68,11 @@ const EditSubscribersTable: FC = () => {
     setLimit(parseInt(event.target.value));
   };
 
-  const selectedSomeCryptoOrders =
-    selectedSubscribers.length > 0 &&
-    selectedSubscribers.length < emails.length;
-  const selectedAllCryptoOrders =
-    selectedSubscribers.length === emails.length;
+  const selectedSomeCourses =
+    selectedCourses.length > 0 &&
+    selectedCourses.length < courseIndices.length;
+  const selectedAllCourses =
+    selectedCourses.length === courseIndices.length;
   const theme = useTheme();
 
   return (
@@ -85,7 +84,7 @@ const EditSubscribersTable: FC = () => {
       )}
       {!selectedBulkActions && (
         <CardHeader
-          title="Subscribers"
+          title="Series"
         />
       )}
       <Divider />
@@ -96,38 +95,38 @@ const EditSubscribersTable: FC = () => {
               <TableCell padding="checkbox">
                 <Checkbox
                   color="primary"
-                  checked={selectedAllCryptoOrders}
-                  indeterminate={selectedSomeCryptoOrders}
-                  onChange={handleSelectAllSubscribers}
+                  checked={selectedAllCourses}
+                  indeterminate={selectedSomeCourses}
+                  onChange={handleSelectAllCourses}
                 />
               </TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>First Name</TableCell>
-              <TableCell>Tags</TableCell>
-              <TableCell align="left">Courses</TableCell>
+              <TableCell>Course Name</TableCell>
+              <TableCell>Emails</TableCell>
+              <TableCell>Stages</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {emails.map((email) => {
-              const subscriber = courses[email];
-              const isSubscriberSelected = selectedSubscribers.includes(
-                  email
+            {courseIndices.map((index) => {
+              const course = courses[index];
+              const isCourseSelected = selectedCourses.includes(
+                  index
               );
+
               return (
                 <TableRow
                   hover
-                  key={email}
-                  selected={isSubscriberSelected}
+                  key={index}
+                  selected={isCourseSelected}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
                       color="primary"
-                      checked={isSubscriberSelected}
+                      checked={isCourseSelected}
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneSubscriber(event, email)
+                        handleSelectOneSubscriber(event, index)
                       }
-                      value={isSubscriberSelected}
+                      value={isCourseSelected}
                     />
                   </TableCell>
                   <TableCell>
@@ -138,39 +137,34 @@ const EditSubscribersTable: FC = () => {
                       gutterBottom
                       noWrap
                     >
-                      {email}
+                      {course.courseName}
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <StyledTextareaAutosize
-                        value={subscriber.firstName}
-                    />
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {}
+                    </Typography>
                   </TableCell>
                   <TableCell>
-                      <StyledTextareaAutosize
-                          value={subscriber.tags.join(", ")}
-                      />
-                  </TableCell>
-                  <TableCell align="left">
-                    <StyledTextareaAutosize
-                        value={subscriber.courses.join(", ")}
-                    />
+                    {/*{tagsLine.map((tagLine) => (*/}
+                    {/*  <Typography*/}
+                    {/*    variant="body1"*/}
+                    {/*    fontWeight="bold"*/}
+                    {/*    color="text.primary"*/}
+                    {/*    gutterBottom*/}
+                    {/*    noWrap*/}
+                    {/*  >*/}
+                    {/*    {tagLine}*/}
+                    {/*  </Typography>*/}
+                    {/*))}*/}
                   </TableCell>
                   <TableCell align="right">
-                    <Tooltip title="Save Edits" arrow>
-                      <IconButton
-                        sx={{
-                          '&:hover': {
-                            background: theme.colors.primary.lighter
-                          },
-                          color: theme.palette.primary.main
-                        }}
-                        color="inherit"
-                        size="small"
-                      >
-                        <SaveIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
                     <Tooltip title="Delete Order" arrow>
                       <IconButton
                         sx={{
@@ -193,7 +187,7 @@ const EditSubscribersTable: FC = () => {
       <Box p={2}>
         <TablePagination
           component="div"
-          count={emails.length}
+          count={courseIndices.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -205,12 +199,12 @@ const EditSubscribersTable: FC = () => {
   );
 };
 
-EditSubscribersTable.propTypes = {
+ViewSeriesTable.propTypes = {
   emails: PropTypes.array.isRequired
 };
 
-EditSubscribersTable.defaultProps = {
+ViewSeriesTable.defaultProps = {
   emails: []
 };
 
-export default EditSubscribersTable;
+export default ViewSeriesTable;

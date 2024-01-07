@@ -25,8 +25,8 @@ import BulkActions from './BulkActions';
 import {NewsletterContext} from "../../../../contexts/NewsletterContext";
 
 const ViewSubscribersTable: FC = () => {
-  const { subscribers } = useContext(NewsletterContext);
-  const emails = Object.keys(subscribers)
+  const { courses } = useContext(NewsletterContext);
+  const emails = Object.keys(courses)
   const [selectedSubscribers, setSelectedSubscribers] = useState<string[]>(
     []
   );
@@ -109,7 +109,7 @@ const ViewSubscribersTable: FC = () => {
           </TableHead>
           <TableBody>
             {emails.map((email) => {
-              const subscriber = subscribers[email];
+              const subscriber = courses[email];
               const isSubscriberSelected = selectedSubscribers.includes(
                   email
               );

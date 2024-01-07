@@ -294,17 +294,6 @@ function SidebarMenu() {
                       Edit Schedule
                     </Button>
                   </ListItem>
-                  <ListItem component="div">
-                    <Button
-                        disableRipple
-                        component={RouterLink}
-                        onClick={closeSidebar}
-                        to="delete-schedule"
-                        startIcon={<MmsTwoToneIcon />}
-                    >
-                      Delete Schedule
-                    </Button>
-                  </ListItem>
                 </List>
               </SubMenuWrapper>
             </List>
@@ -318,6 +307,17 @@ function SidebarMenu() {
             >
               <SubMenuWrapper>
                 <List component="div">
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="view-series"
+                        startIcon={<BrightnessLowTwoToneIcon />}
+                    >
+                      Series
+                    </Button>
+                  </ListItem>
                   <ListItem component="div">
                     <Button
                         disableRipple

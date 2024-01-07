@@ -1,4 +1,4 @@
-import {FC, ChangeEvent, useState, useContext} from 'react';
+import React, {FC, ChangeEvent, useState, useContext} from 'react';
 import PropTypes from 'prop-types';
 import {
   Tooltip,
@@ -24,6 +24,9 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
 import {NewsletterContext} from "../../../../contexts/NewsletterContext";
 import StyledTextareaAutosize from "../../../../components/EditableTextArea";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
+import {DatePicker} from "@mui/x-date-pickers/DatePicker";
+import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 
 const EditScheduleTable: FC = () => {
   const { schedule } = useContext(NewsletterContext);
@@ -110,7 +113,6 @@ const EditScheduleTable: FC = () => {
           <TableBody>
             {scheduleIndices.map((index) => {
               const event = schedule[index];
-              console.log(event)
               const isEventSelected = selectedSchedule.includes(
                   index
               );
@@ -142,9 +144,11 @@ const EditScheduleTable: FC = () => {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <StyledTextareaAutosize
-                        value={event.date.toString()}
-                    />
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                          value={event.date}
+                      />
+                    </LocalizationProvider>
                   </TableCell>
                   <TableCell>
                       <StyledTextareaAutosize

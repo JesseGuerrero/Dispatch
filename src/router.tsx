@@ -32,6 +32,7 @@ const Overview= Loader(lazy(() => import('src/content/application/main/overview'
 const Settings = Loader(lazy(() => import('src/content/application/main/settings')));
 
 //Manage Courses
+const Series = Loader(lazy(() => import('src/content/application/manageseries/series')));
 const CreateTrigger = Loader(lazy(() => import('src/content/application/manageseries/createtrigger')));
 const CreateSeries = Loader(lazy(() => import('src/content/application/manageseries/createseries')));
 const DeleteSeries = Loader(lazy(() => import('src/content/application/manageseries/deleteseries')));
@@ -164,6 +165,10 @@ const routes: RouteObject[] = [
           {
             path: 'settings',
             element: <Settings />
+          },
+          {
+            path: 'view-series',
+            element: <Series />
           },
           {
             path: 'create-trigger',

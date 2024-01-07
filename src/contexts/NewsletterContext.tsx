@@ -46,7 +46,7 @@ type Newsletter = {
 type NewsletterContext = {
     user: User;
     newsletter: Newsletter;
-    subscribers: subscribers;
+    subscribers;
     tags: tags;
     schedule: ScheduleItem[];
     courses: Course[];
