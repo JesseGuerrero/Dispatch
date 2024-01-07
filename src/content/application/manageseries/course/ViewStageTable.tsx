@@ -25,7 +25,14 @@ import BulkActions from './BulkActions';
 import {NewsletterContext} from "../../../../contexts/NewsletterContext";
 
 const ViewStageTable: FC = () => {
-  const { courses } = useContext(NewsletterContext);
+  const { courses } = useContext(NewsletterContext); //Create an api response which calls one course by name
+  const url = window.location.href;
+  const parts =url.split('/');
+  const rightmostPart = parts[parts.length - 1];
+  console.log(rightmostPart)
+  for(let course of courses) { //Stages as list, emails as drop downs
+
+  }
   const courseIndices = Array.from({ length: courses.length }, (_, index) => index);
   const [selectedCourses, setSelectedCourses] = useState<number[]>(
     []
