@@ -30,7 +30,7 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 
 const EditScheduleTable: FC = () => {
   const { schedule } = useContext(NewsletterContext);
-  const scheduleIndices = Array.from({ length: schedule.length -1 }, (_, index) => index + 1);
+  const scheduleIndices = Array.from({ length: schedule.length }, (_, index) => index);
   const [selectedSchedule, setSelectedSchedule] = useState<number[]>(
     []
   );

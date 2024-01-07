@@ -161,6 +161,7 @@ export const NewsletterProvider: FC = ({ children }) => {
 
         schedule.push(event);
     }
+    console.log(schedule)
 
     let courses = [
         {

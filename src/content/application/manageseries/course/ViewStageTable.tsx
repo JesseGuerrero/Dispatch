@@ -24,7 +24,7 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
 import {NewsletterContext} from "../../../../contexts/NewsletterContext";
 
-const ViewSeriesTable: FC = () => {
+const ViewStageTable: FC = () => {
   const { courses } = useContext(NewsletterContext);
   const courseIndices = Array.from({ length: courses.length }, (_, index) => index);
   const [selectedCourses, setSelectedCourses] = useState<number[]>(
@@ -176,12 +176,12 @@ const ViewSeriesTable: FC = () => {
   );
 };
 
-ViewSeriesTable.propTypes = {
+ViewStageTable.propTypes = {
   emails: PropTypes.array.isRequired
 };
 
-ViewSeriesTable.defaultProps = {
+ViewStageTable.defaultProps = {
   emails: []
 };
 
-export default ViewSeriesTable;
+export default ViewStageTable;
