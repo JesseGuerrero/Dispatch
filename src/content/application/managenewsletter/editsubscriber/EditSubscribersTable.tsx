@@ -26,8 +26,8 @@ import {NewsletterContext} from "../../../../contexts/NewsletterContext";
 import StyledTextareaAutosize from "../../../../components/EditableTextArea";
 
 const EditSubscribersTable: FC = () => {
-  const { courses } = useContext(NewsletterContext);
-  const emails = Object.keys(courses)
+  const { subscribers } = useContext(NewsletterContext);
+  const emails = Object.keys(subscribers)
   const [selectedSubscribers, setSelectedSubscribers] = useState<string[]>(
     []
   );
@@ -110,7 +110,7 @@ const EditSubscribersTable: FC = () => {
           </TableHead>
           <TableBody>
             {emails.map((email) => {
-              const subscriber = courses[email];
+              const subscriber = subscribers[email];
               const isSubscriberSelected = selectedSubscribers.includes(
                   email
               );

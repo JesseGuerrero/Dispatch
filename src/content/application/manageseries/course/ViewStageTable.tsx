@@ -16,13 +16,14 @@ import {
   TableContainer,
   Typography,
   useTheme,
-  CardHeader
+  CardHeader, MenuItem, Select
 } from '@mui/material';
 
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
 import {NewsletterContext} from "../../../../contexts/NewsletterContext";
+import StyledTextareaAutosize from "../../../../components/EditableTextArea";
 
 const ViewStageTable: FC = () => {
   const { courses } = useContext(NewsletterContext); //Create an api response which calls one course by name
@@ -30,38 +31,42 @@ const ViewStageTable: FC = () => {
   const parts =url.split('/');
   const rightmostPart = parts[parts.length - 1];
   console.log(rightmostPart)
-  for(let course of courses) { //Stages as list, emails as drop downs
-
-  }
-  const courseIndices = Array.from({ length: courses.length }, (_, index) => index);
-  const [selectedCourses, setSelectedCourses] = useState<number[]>(
+  let course;
+  courses.filter((c) => {
+    if(c.courseName === rightmostPart){
+      course = c;
+    }
+  });
+  console.log(course)
+  const stageIndices = Object.keys(course.stages);
+  const [selectedStages, setSelectedStages] = useState<string[]>(
     []
   );
-  const selectedBulkActions = selectedCourses.length > 0;
+  const selectedBulkActions = selectedStages.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
 
-  const handleSelectAllCourses = (
+  const handleSelectAllStages = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
-    setSelectedCourses(
+    setSelectedStages(
       event.target.checked
-        ? courseIndices
+        ? stageIndices
         : []
     );
   };
 
-  const handleSelectOneSubscriber = (
+  const handleSelectOneStage = (
     event: ChangeEvent<HTMLInputElement>,
-    index: number
+    index: string
   ): void => {
-    if (!selectedCourses.includes(index)) {
-      setSelectedCourses((prevSelected) => [
+    if (!selectedStages.includes(index)) {
+      setSelectedStages((prevSelected) => [
         ...prevSelected,
         index
       ]);
     } else {
-      setSelectedCourses((prevSelected) =>
+      setSelectedStages((prevSelected) =>
         prevSelected.filter((key) => key !== index)
       );
     }
@@ -75,11 +80,11 @@ const ViewStageTable: FC = () => {
     setLimit(parseInt(event.target.value));
   };
 
-  const selectedSomeCourses =
-    selectedCourses.length > 0 &&
-    selectedCourses.length < courseIndices.length;
+  const selectedSomeStages =
+    selectedStages.length > 0 &&
+    selectedStages.length < stageIndices.length;
   const selectedAllCourses =
-    selectedCourses.length === courseIndices.length;
+    selectedStages.length === stageIndices.length;
   const theme = useTheme();
 
   return (
@@ -103,39 +108,58 @@ const ViewStageTable: FC = () => {
                 <Checkbox
                   color="primary"
                   checked={selectedAllCourses}
-                  indeterminate={selectedSomeCourses}
-                  onChange={handleSelectAllCourses}
+                  indeterminate={selectedSomeStages}
+                  onChange={handleSelectAllStages}
                 />
               </TableCell>
-              <TableCell>Course Name</TableCell>
+              <TableCell>Emails</TableCell>
+              <TableCell>Stage</TableCell>
+              <TableCell>Tags</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {courseIndices.map((index) => {
-              const course = courses[index];
-              const isCourseSelected = selectedCourses.includes(
-                  index
+            {stageIndices.map((day) => {
+              const stageEmails = course.stages[day];
+              const email = course.emails[parseInt(day)-1];
+
+              const isStageSelected = selectedStages.includes(
+                  day
               );
 
               return (
                 <TableRow
                   hover
-                  key={index}
-                  selected={isCourseSelected}
+                  key={day}
+                  selected={isStageSelected}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
                       color="primary"
-                      checked={isCourseSelected}
+                      checked={isStageSelected}
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneSubscriber(event, index)
+                        handleSelectOneStage(event, day)
                       }
-                      value={isCourseSelected}
+                      value={isStageSelected}
                     />
                   </TableCell>
                   <TableCell>
-                    <a href={"view-series/" + course.courseName}>
+                    <Select
+                        value={email.subject}
+                        onChange={(event) => {
+                          // Handle the change here if needed
+                        }}
+                        fullWidth
+                        displayEmpty
+                    >
+                      {/* You can map over your options and create MenuItems dynamically */}
+                      <MenuItem value="" disabled>Select an email subject</MenuItem>
+                      <MenuItem value="subject1">Subject 1</MenuItem>
+                      <MenuItem value="subject2">Subject 2</MenuItem>
+                      {/* Add more options as needed */}
+                    </Select>
+                  </TableCell>
+                  <TableCell>
                       <Typography
                           variant="body1"
                           fontWeight="bold"
@@ -143,9 +167,13 @@ const ViewStageTable: FC = () => {
                           gutterBottom
                           noWrap
                       >
-                        {course.courseName}
+                        {day}
                       </Typography>
-                    </a>
+                  </TableCell>
+                  <TableCell>
+                    <StyledTextareaAutosize
+                        value={stageEmails.join(", ")}
+                    />
                   </TableCell>
 
                   <TableCell align="right">
@@ -171,7 +199,7 @@ const ViewStageTable: FC = () => {
       <Box p={2}>
         <TablePagination
           component="div"
-          count={courseIndices.length}
+          count={stageIndices.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
