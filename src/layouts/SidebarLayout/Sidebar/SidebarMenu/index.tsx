@@ -277,6 +277,17 @@ function SidebarMenu() {
                         disableRipple
                         component={RouterLink}
                         onClick={closeSidebar}
+                        to="edit-schedule"
+                        startIcon={<MmsTwoToneIcon />}
+                    >
+                      Schedule
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
                         to="schedule-email"
                         startIcon={<BrightnessLowTwoToneIcon />}
                     >
@@ -288,10 +299,21 @@ function SidebarMenu() {
                         disableRipple
                         component={RouterLink}
                         onClick={closeSidebar}
-                        to="edit-schedule"
-                        startIcon={<MmsTwoToneIcon />}
+                        to="edit-trigger"
+                        startIcon={<BrightnessLowTwoToneIcon />}
                     >
-                      Edit Schedule
+                      Trigger
+                    </Button>
+                  </ListItem>
+                  <ListItem component="div">
+                    <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to="create-trigger"
+                        startIcon={<BrightnessLowTwoToneIcon />}
+                    >
+                      Create Trigger
                     </Button>
                   </ListItem>
                 </List>
@@ -323,32 +345,10 @@ function SidebarMenu() {
                         disableRipple
                         component={RouterLink}
                         onClick={closeSidebar}
-                        to="create-trigger"
-                        startIcon={<BrightnessLowTwoToneIcon />}
-                    >
-                      Create Trigger
-                    </Button>
-                  </ListItem>
-                  <ListItem component="div">
-                    <Button
-                        disableRipple
-                        component={RouterLink}
-                        onClick={closeSidebar}
                         to="create-series"
                         startIcon={<BrightnessLowTwoToneIcon />}
                     >
                       Create Series
-                    </Button>
-                  </ListItem>
-                  <ListItem component="div">
-                    <Button
-                        disableRipple
-                        component={RouterLink}
-                        onClick={closeSidebar}
-                        to="edit-series"
-                        startIcon={<MmsTwoToneIcon />}
-                    >
-                      Edit Series
                     </Button>
                   </ListItem>
                   <ListItem component="div">

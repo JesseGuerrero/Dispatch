@@ -34,10 +34,8 @@ const Settings = Loader(lazy(() => import('src/content/application/main/settings
 //Manage Courses
 const Course = Loader(lazy(() => import('src/content/application/manageseries/course')));
 const Series = Loader(lazy(() => import('src/content/application/manageseries/series')));
-const CreateTrigger = Loader(lazy(() => import('src/content/application/manageseries/createtrigger')));
 const CreateSeries = Loader(lazy(() => import('src/content/application/manageseries/createseries')));
 const DeleteSeries = Loader(lazy(() => import('src/content/application/manageseries/deleteseries')));
-const EditSeries = Loader(lazy(() => import('src/content/application/manageseries/editseries')));
 
 //Manage Newsletter
 const AddEmailToTag = Loader(lazy(() => import('src/content/application/managenewsletter/addemailtotag')));
@@ -51,7 +49,9 @@ const Tags = Loader(lazy(() => import('src/content/application/managenewsletter/
 
 //Manage Scheduler
 const EditSchedule = Loader(lazy(() => import('src/content/application/managescheduler/editschedule')));
+const EditTrigger = Loader(lazy(() => import('src/content/application/managescheduler/edittrigger')));
 const ScheduleEmail = Loader(lazy(() => import('src/content/application/managescheduler/scheduleemail')));
+const CreateTrigger = Loader(lazy(() => import('src/content/application/managescheduler/createtrigger')));
 
 //Write Email
 const CreateEmail = Loader(lazy(() => import('src/content/application/writeemail/createemail')));
@@ -185,16 +185,16 @@ const routes: RouteObject[] = [
             element: <CreateTrigger />
           },
           {
+            path: 'edit-trigger',
+            element: <EditTrigger />
+          },
+          {
             path: 'create-series',
             element: <CreateSeries />
           },
           {
             path: 'delete-series',
             element: <DeleteSeries />
-          },
-          {
-            path: 'edit-series',
-            element: <EditSeries />
           },
           {
             path: 'add-email-to-tag',

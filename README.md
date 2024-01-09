@@ -84,13 +84,18 @@
   - <s>Delete tag</s>
 - Scheduler by tag (Empty endpoints)
   - Make a date picker with default date from json
+- Triggers: First subscribe, added to tag, days in newsletter, days without email, date
+  - Actions: Send email, add to tag, remove from tag, start series, stop series
 - Create course json according to Mongo, use context
 - Manage Courses (empty endpoints)
 - Email writer
   - Writer
   - Preview
   - Templating
-
+- Redo in Figma
+  - Landing Page
+  - Login/register
+  - Dashboard/Form
 *Create a mongo view for the calendar
 **--Write backend and security for all the above from top to bottom**
 
