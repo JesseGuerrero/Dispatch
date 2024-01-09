@@ -12,9 +12,12 @@ import {
 } from '@mui/material';
 import Footer from 'src/components/Footer';
 
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import AddTwoToneIcon from "@mui/icons-material/AddTwoTone";
+import OnAddToTag from "./OnAddToTag";
+import OnDate from "./OnDate"
+import OnDaysWithoutEmail from "./OnDaysWithoutEmail";
+import OnSubscribe from "./OnSubscribe";
+import OnDaysInNewsletter from "./OnDaysInNewsletter";
+
 
 function AddSubscriber() {
   return (
@@ -37,46 +40,11 @@ function AddSubscriber() {
           alignItems="stretch"
           spacing={3}
         >
-          <Grid item xs={12}>
-            <Card>
-              <CardHeader title="New Subscriber" />
-              <Divider />
-              <CardContent>
-                <Box
-                    component="form"
-                    sx={{
-                      '& .MuiTextField-root': {m: 1, width: '25ch'}
-                    }}
-                    noValidate
-                    autoComplete="off"
-                >
-                  <div>
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="First Name"
-                        placeholder="First Name"
-                    />
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="Email"
-                        placeholder="Email"
-                    />
-                  </div>
-                  <div>
-                    <Button
-                        sx={{margin: 1}}
-                        variant="contained"
-                        startIcon={<AddTwoToneIcon fontSize="small"/>}
-                    >
-                      Place Trigger
-                    </Button>
-                  </div>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+          <OnAddToTag />
+          <OnDate />
+          <OnDaysInNewsletter />
+          <OnDaysWithoutEmail />
+          <OnSubscribe />
         </Grid>
       </Container>
       <Footer/>
