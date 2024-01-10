@@ -9,10 +9,10 @@ function PageHeader() {
     <Grid container justifyContent="space-between" alignItems="center">
       <Grid item>
         <Typography variant="h3" component="h3" gutterBottom>
-          Subscribers
+          Trigger
         </Typography>
         <Typography variant="subtitle2">
-          {user.name}, these are your newsletter subscribers
+          {user.name}, these are your newsletter triggers
         </Typography>
       </Grid>
     </Grid>

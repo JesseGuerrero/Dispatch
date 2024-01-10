@@ -30,14 +30,13 @@ const ViewStageTable: FC = () => {
   const url = window.location.href;
   const parts =url.split('/');
   const rightmostPart = parts[parts.length - 1];
-  console.log(rightmostPart)
   let course;
   courses.filter((c) => {
     if(c.courseName === rightmostPart){
       course = c;
     }
   });
-  console.log(course)
+
   const stageIndices = Object.keys(course.stages);
   const [selectedStages, setSelectedStages] = useState<string[]>(
     []

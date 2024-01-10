@@ -12,23 +12,23 @@ import {
 } from '@mui/material';
 import Footer from 'src/components/Footer';
 
-import OnAddToTag from "./OnAddToTag";
-import OnDate from "./OnDate"
-import OnDaysWithoutEmail from "./OnDaysWithoutEmail";
-import OnSubscribe from "./OnSubscribe";
-import OnDaysInNewsletter from "./OnDaysInNewsletter";
+import OnAddToTag from "./Cards/OnAddToTag";
+import OnDate from "./Cards/OnDate"
+import OnDaysWithoutEmail from "./Cards/OnDaysWithoutEmail";
+import OnSubscribe from "./Cards/OnSubscribe";
+import OnDaysInNewsletter from "./Cards/OnDaysInNewsletter";
 
 
 function AddSubscriber() {
   return (
     <>
       <Helmet>
-        <title>Add Subscriber</title>
+        <title>Add Trigger</title>
       </Helmet>
       <PageTitleWrapper>
         <PageTitle
-          heading="Add Subscriber"
-          subHeading="Add one subscriber to your newsletter"
+          heading="Add Trigger"
+          subHeading="Add one trigger to your newsletter"
           docs="https://material-ui.com/components/text-fields/"
         />
       </PageTitleWrapper>

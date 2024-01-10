@@ -1,13 +1,26 @@
 // SubscriberForm.tsx
 import React from 'react';
-import { Grid, Card, CardHeader, Divider, CardContent, Box, TextField, Button } from '@mui/material';
+import {
+    Grid,
+    Card,
+    CardHeader,
+    Divider,
+    CardContent,
+    Box,
+    TextField,
+    Button,
+    Select,
+    MenuItem,
+    TableCell
+} from '@mui/material';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
+import Actions from '../Actions'
 
-const OnSubscribe: React.FC = () => {
+const OnAddToTag: React.FC = () => {
     return (
         <Grid item xs={12}>
             <Card>
-                <CardHeader title="New Subscriber" />
+                <CardHeader title="On Add To Tag" />
                 <Divider />
                 <CardContent>
                     <Box
@@ -22,15 +35,10 @@ const OnSubscribe: React.FC = () => {
                             <TextField
                                 required
                                 id="outlined-required"
-                                label="First Name"
-                                placeholder="First Name"
+                                label="Tag"
+                                placeholder="Tag"
                             />
-                            <TextField
-                                required
-                                id="outlined-required"
-                                label="Email"
-                                placeholder="Email"
-                            />
+                            <Actions type={"OnAddToTag"} />
                         </div>
                         <div>
                             <Button
@@ -48,4 +56,4 @@ const OnSubscribe: React.FC = () => {
     );
 };
 
-export default OnSubscribe;
+export default OnAddToTag;

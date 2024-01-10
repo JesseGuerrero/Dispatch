@@ -2,12 +2,13 @@
 import React from 'react';
 import { Grid, Card, CardHeader, Divider, CardContent, Box, TextField, Button } from '@mui/material';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
+import Actions from "../Actions";
 
-const OnDate: React.FC = () => {
+const OnDaysWithoutEmail: React.FC = () => {
     return (
         <Grid item xs={12}>
             <Card>
-                <CardHeader title="New Subscriber" />
+                <CardHeader title="After Days Without Email" />
                 <Divider />
                 <CardContent>
                     <Box
@@ -25,12 +26,7 @@ const OnDate: React.FC = () => {
                                 label="First Name"
                                 placeholder="First Name"
                             />
-                            <TextField
-                                required
-                                id="outlined-required"
-                                label="Email"
-                                placeholder="Email"
-                            />
+                            <Actions type={"OnDaysWithoutEmail"} />
                         </div>
                         <div>
                             <Button
@@ -48,4 +44,4 @@ const OnDate: React.FC = () => {
     );
 };
 
-export default OnDate;
+export default OnDaysWithoutEmail;

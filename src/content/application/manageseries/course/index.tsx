@@ -10,7 +10,7 @@ function ViewSubscribers() {
   return (
     <>
       <Helmet>
-        <title>Subscribers</title>
+        <title>Series</title>
       </Helmet>
       <PageTitleWrapper>
         <PageHeader />
