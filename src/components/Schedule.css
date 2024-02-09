@@ -1,0 +1,13 @@
+.pagination {
+    /* Bootstrap overrides */
+    --bs-body-bg: var(--color-bg);
+    --bs-body-color: var(--color-text);
+    --bs-pagination-color: var(--color-text);
+    --bs-pagination-hover-bg: var(--color-bg-secondary);
+    --bs-pagination-active-bg: var(--color-today-bg);
+    --bs-pagination-active-border-color: white;
+}
+
+#filter-table::placeholder {
+    color: var(--color-text-muted);
+}

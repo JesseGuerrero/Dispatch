@@ -1,3 +1,93 @@
+:root {
+  /* Primary palette */
+  --color-primary: #8ab4f8;    /* A bright blue for primary actions */
+  --color-primary-light: #b3d4fc; /* A lighter blue for primary hover states */
+  --color-primary-dark: #5f8df0;  /* A darker blue for primary active states */
+
+  /* Background colors */
+  --color-bg: #121212;        /* Dark background */
+  --color-bg-secondary: #1e1e1e; /* Slightly lighter for secondary background elements */
+
+  /* Text colors */
+  --color-text: #e8e6e3;      /* High contrast text color */
+  --color-text-secondary: #b0b0b0; /* Secondary text with less prominence */
+  --color-text-muted: #6d6d6d; /* Muted text for less important elements */
+
+  /* Border color */
+  --color-border: #323232;    /* Border color for elements */
+
+  /* Error colors */
+  --color-error: #ff9494;     /* Color for error messages or icons */
+  --color-error-dark: #ff6060; /* Darker shade for error states */
+
+  /* Success colors */
+  --color-success: #76c893;   /* Color for success messages or icons */
+  --color-success-dark: #62a77d; /* Darker shade for success states */
+
+  /* Warning colors */
+  --color-warning: #ffbc64;   /* Color for warning messages or icons */
+  --color-warning-dark: #ffaa44; /* Darker shade for warning states */
+
+  /* Info colors */
+  --color-info: #5bc0de;      /* Color for informational messages or icons */
+  --color-info-dark: #31b0d5; /* Darker shade for informational states */
+
+  /* Dark Theme Color Palette */
+  --color-bg: #121212; /* Dark background */
+  --color-bg-secondary: #1e1e1e; /* Slightly lighter for secondary background elements */
+  --color-text: #e8e6e3; /* High contrast text color */
+  --color-border: #323232; /* Border color */
+  --color-event-bg: #5f8df0; /* A darker blue for events */
+  --color-event-bg-hover: #8ab4f8; /* A bright blue for hover states */
+  --color-today-bg: #2a2a2a; /* Background color for today */
+
+  /* Bootstrap overrides */
+  --bs-body-bg: var(--color-bg);
+  --bs-body-color: var(--color-text);
+  --bs-pagination-color: var(--color-text);
+  --bs-pagination-hover-bg: var(--color-bg-secondary);
+  --bs-pagination-active-bg: var(--color-today-bg);
+  --bs-pagination-active-border-color: white;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.button-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary-dark);
+}
+
+.button-primary:hover {
+  background-color: var(--color-primary-light);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.border-element {
+  border-color: var(--color-border);
+}
+
+.alert-error {
+  background-color: var(--color-error);
+}
+
+.alert-success {
+  background-color: var(--color-success);
+}
+
+.alert-warning {
+  background-color: var(--color-warning);
+}
+
+.alert-info {
+  background-color: var(--color-info);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +100,11 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+.form-control:focus {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.2rem rgba(138, 180, 248, 0.25);
 }

@@ -1,0 +1,40 @@
+/* CustomStyles.css */
+
+:root {
+    /* Color palette as provided */
+    --color-primary: #8ab4f8;
+    --color-primary-light: #b3d4fc;
+    --color-primary-dark: #5f8df0;
+    --color-bg: #121212;
+    --color-bg-secondary: #1e1e1e;
+    --color-text: #e8e6e3;
+    --color-text-secondary: #b0b0b0;
+    --color-text-muted: #6d6d6d;
+    --color-border: #323232;
+    --color-error: #ff9494;
+    --color-error-dark: #ff6060;
+    --color-success: #76c893;
+    --color-success-dark: #62a77d;
+    --color-warning: #ffbc64;
+    --color-warning-dark: #ffaa44;
+    --color-info: #5bc0de;
+    --color-info-dark: #31b0d5;
+    --color-event-bg: #5f8df0;
+    --color-event-bg-hover: #8ab4f8;
+    --color-today-bg: #2a2a2a;
+}
+
+.table-custom {
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    border-color: var(--color-border);
+}
+
+.table-custom thead {
+    background-color: var(--color-bg-secondary);
+}
+
+.table-custom th,
+.table-custom td {
+    border-color: var(--color-border);
+}

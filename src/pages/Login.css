@@ -1,0 +1,43 @@
+.login-container {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+    padding-top: 50px;
+}
+
+.login-container .form-label,
+.login-container .form-control {
+    color: var(--color-text);
+}
+
+.login-container .form-control {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border);
+}
+
+.login-container .form-control::placeholder {
+    color: var(--color-text-muted);
+}
+
+.login-container .form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.2rem rgba(138, 180, 248, 0.25);
+}
+
+.login-container .btn-primary {
+    margin-top: 5px;
+    background-color: var(--color-primary);
+    border-color: var(--color-primary-dark);
+}
+
+.login-container .btn-primary:hover {
+    background-color: var(--color-primary-light);
+}
+
+.login-container .nav-link {
+    color: var(--color-info);
+}
+
+.login-container .nav-link:hover {
+    color: var(--color-info-dark);
+}

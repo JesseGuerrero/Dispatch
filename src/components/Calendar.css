@@ -1,0 +1,46 @@
+/* Calendar Container */
+.rbc-calendar {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+/* Header */
+.rbc-header {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Month view dates */
+.rbc-day-bg {
+    background-color: var(--color-bg);
+}
+
+/* Today */
+.rbc-today {
+    background-color: var(--color-today-bg);
+}
+
+/* Events */
+.rbc-event {
+    background-color: var(--color-event-bg);
+    color: var(--color-text);
+    border-radius: 4px;
+    border: none;
+}
+
+/* Event when hovered */
+.rbc-event:hover {
+    background-color: var(--color-event-bg-hover);
+}
+
+/* Buttons */
+.rbc-btn {
+    color: var(--color-text);
+}
+
+.rbc-toolbar button {
+    color: var(--color-text-muted);
+}
+
+/* You might need to adjust additional elements depending on your UI needs */

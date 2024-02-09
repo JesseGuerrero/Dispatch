@@ -1,0 +1,25 @@
+/* DeleteEmail.css */
+
+.delete-email-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.options-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.options-list {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Adjust width for two columns */
+}
+
+.options-list li {
+    cursor: pointer;
+    margin-bottom: 5px;
+}
