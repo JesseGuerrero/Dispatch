@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Nav } from 'react-bootstrap';
-import './Login.css'; // Make sure to create this CSS file
+import './Login.css';
+import {requestAPI} from "../Utils"; // Make sure to create this CSS file
 
 const Login = () => {
+    const [responseText, setResponseText] = useState("");
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        // Handle form submission here
-
-        // Navigate to /dashboard
-        navigate('/dashboard');
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const response = await requestAPI('/auth/login', 'POST', {
+            email: email,
+            password: password
+        });
+        if(response && response.ok)
+            window.location.href = '/dashboard';
+        else
+            setResponseText("Improper login")
     };
 
     return (
@@ -43,6 +49,7 @@ const Login = () => {
                             />
                         </Form.Group>
 
+                        <p>{responseText}</p>
                         <Button variant="primary" type="submit" className="w-100">
                             Login
                         </Button>
@@ -50,6 +57,9 @@ const Login = () => {
                         <Nav className="justify-content-center mt-3">
                             <Nav.Item>
                                 <Nav.Link href="/signup">Sign Up</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/change-password">Change password</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link href="/forgot-password">Forgot Your Password?</Nav.Link>

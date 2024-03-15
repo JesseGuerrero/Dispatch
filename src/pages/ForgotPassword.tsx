@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col, Nav } from 'react-bootstrap';
-import './ForgotPassword.css'; // Make sure to create this CSS file
+import './ForgotPassword.css';
+import {requestAPI} from "../Utils";
+import {useNavigate} from "react-router-dom"; // Make sure to create this CSS file
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState<string>('');
+    const [responseText, setResponseText] = useState("");
+    const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        setResponseText("Sending temporary email...")
         event.preventDefault();
-        // Handle send email logic here
+        const response = await requestAPI('/forgot-password', 'POST', {
+            email: email,
+        })
+        if(response && response.ok)
+            navigate('/change-password')
+        else
+            setResponseText("Email error")
     };
 
     return (
@@ -27,13 +38,16 @@ const ForgotPassword = () => {
                             />
                         </Form.Group>
 
+                        <p>{responseText}</p>
                         <Button variant="primary" type="submit" className="w-100">
                             Send Email
                         </Button>
-
                         <Nav className="justify-content-center mt-3">
                             <Nav.Item>
                                 <Nav.Link href="/signup">Sign Up</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/change-password">Change password</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link href="/login">Login</Nav.Link>

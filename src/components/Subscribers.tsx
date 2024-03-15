@@ -1,25 +1,32 @@
 import React, { useState } from 'react';
 import { Table, Pagination, Form } from 'react-bootstrap';
 import './Schedule.css'
+import {requestAPI} from "../Utils";
+
+interface EmailRow {
+    id: number;
+    email: string;
+    firstName: string;
+    tags: string;
+    courses: string;
+    actions: string;
+}
 
 function Subscribers() {
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [rows, setRows] = useState<EmailRow[]>([]);
     const [selectedRows, setSelectedRows] = useState<number[]>([]);
-    const [searchQuery, setSearchQuery] = useState<string>(''); // State for search query
-    const rows = [
-        { id: 1, email: 'Item 1', firstName: '2', tags: '8', courses: '8', actions: 'Delete' },
-        { id: 2, email: 'Item 2', firstName: '3', tags: '8', courses: '8', actions: 'Delete' },
-        { id: 3, email: 'Item 3', firstName: '9', tags: '8', courses: '8', actions: 'Delete' },
-        { id: 4, email: 'Item 4', firstName: '7', tags: '8', courses: '8', actions: 'Delete' },
-        { id: 5, email: 'Item 5', firstName: '8', tags: '8', courses: '8', actions: 'Delete' },
-    ];
 
-    const filteredRows = rows.filter(row =>
-        row.email.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(event.target.value);
+        const response = await requestAPI("/email/all", "GET", {})
+        const data = await response.json()
+        setRows(data.emails);
+    };
 
     const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.checked) {
-            setSelectedRows(filteredRows.map(row => row.id));
+            setSelectedRows(rows.map(row => row.id));
         } else {
             setSelectedRows([]);
         }
@@ -41,7 +48,7 @@ function Subscribers() {
                     placeholder="Search by email"
                     value={searchQuery}
                     id={"filter-table"}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={onChange}
                 />
             </Form.Group>
 
@@ -49,7 +56,7 @@ function Subscribers() {
                 <thead style={{ backgroundColor: 'var(--color-bg-secondary)' }}>
                 <tr>
                     <th><Form.Check type="checkbox" onChange={handleSelectAll}
-                                    checked={selectedRows.length === filteredRows.length}/></th>
+                                    checked={selectedRows.length === rows.length}/></th>
                     <th>Email</th>
                     <th>First Name</th>
                     <th>Tags</th>
@@ -58,7 +65,7 @@ function Subscribers() {
                 </tr>
                 </thead>
                 <tbody>
-                {filteredRows.map(row => (
+                {rows.map(row => (
                     <tr key={row.id}>
                         <td><Form.Check type="checkbox" checked={selectedRows.includes(row.id)}
                                         onChange={() => handleSelectRow(row.id)}/></td>

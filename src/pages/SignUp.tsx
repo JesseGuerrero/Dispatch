@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col} from 'react-bootstrap';
 import './SignUp.css';
-import { requestAPI, verifyStrongPassword, bcryptPassword } from "../Utils";
+import { requestAPI, verifyStrongPassword } from "../Utils";
 
 function isAuthInvisible(form: HTMLFormElement) {
     // Check if auth code/token form group is display none
     const authCodeFormGroup = form.querySelector('#formBasicConfirmToken');
     if (authCodeFormGroup) {
         const displayStyle = window.getComputedStyle(authCodeFormGroup).display;
-        console.log(displayStyle)
         return displayStyle === 'none'
     }
     return true;
@@ -19,31 +18,38 @@ const SignUp = () => {
     const [authCodeFormVisible, setAuthCodeFormVisible] = useState(false);
     const preAuthentication = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setResponseText("Loading...")
         const form = e.target as HTMLFormElement;
         if(isAuthInvisible(form)) {
-            const response = await requestAPI('/createToken', 'POST', {
+            const response = await requestAPI('/create-token', 'POST', {
+                firstName: form.owner.value,
                 email: form.email.value
             });
             if(response && response.ok) {
-                setResponseText("Verification email sent, you have 2 hours to verify...")
+                setResponseText("Verification email sent...")
                 setAuthCodeFormVisible(true);
             } else {
-                // console.log(response)
                 setResponseText("An error has occured")
             }
             return;
         }
-        if(form.token.value.length == 4 && form.password.value === form.confirmPassword.value)
+        else if(form.token.value.length == 4 && form.password.value === form.confirmPassword.value)
             if(verifyStrongPassword(form.password.value)) {
-                // Check if auth code/token form group is display none here
-                bcryptPassword(form.password.value).then(async encryptedPassword => {
-                    const response = await requestAPI('/createNewsletter', 'POST', {
-                        token: form.token.value,
-                        title: form.newsletterTitle.value,
-                        ownerName: form.ownerName.value,
-                        email: form.email.value,
-                        password: encryptedPassword,
-                    });
+                    const validToken = await requestAPI('/validate-token', 'POST', {
+                        'email': form.email.value,
+                        'token': form.token.value
+                    })
+                    if(validToken && validToken.status != 200) {
+                        setResponseText("invalid token")
+                        return;
+                    }
+                    const response = await requestAPI('/newsletter', 'POST', {
+                        'title': form.titleVar.value,
+                        'owner': form.owner.value,
+                        'email': form.email.value,
+                        'password': form.password.value
+                    })
+
                     if (!response)
                         setResponseText("Signup failed!"); // Set error message
                     else if (response.ok)
@@ -52,9 +58,7 @@ const SignUp = () => {
                         setResponseText("Email already exists!"); // Set error message
                     else
                         setResponseText("Signup failed!")
-                })
-            }
-            else
+            } else
                 setResponseText("Set a password with 1 letter, 1 capital letter, 1 number & 5 characters...");
         else
             setResponseText("Passwords or token do not match!");
@@ -67,23 +71,23 @@ const SignUp = () => {
                     <Form onSubmit={preAuthentication}>
                         <Form.Group controlId="formBasicTitle">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text" placeholder="Enter newsletter title" name="newsletterTitle" required/>
+                            <Form.Control type="text" value="Newsletter Test" placeholder="Enter newsletter title" name="titleVar" required/>
                         </Form.Group>
                         <Form.Group controlId="formBasicFirstName">
                             <Form.Label>First Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your first name" name="ownerName" required/>
+                            <Form.Control type="text" value="Jesse" placeholder="Enter your first name" name="owner" required/>
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" value="contact@jessenerio.com" placeholder="Enter email" name="email" required/>
+                            <Form.Control type="email" value="jesseguerrero1991@gmail.com" placeholder="Enter email" name="email" required/>
                         </Form.Group>
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" name="password" required/>
+                            <Form.Control type="password" value="D0lot$ofwork" placeholder="Password" name="password" required/>
                         </Form.Group>
                         <Form.Group controlId="formBasicConfirmPassword">
                             <Form.Label>Confirm Password</Form.Label>
-                            <Form.Control type="password" placeholder="Confirm Password" name="confirmPassword" required/>
+                            <Form.Control type="password" value="D0lot$ofwork" placeholder="Confirm Password" name="confirmPassword" required/>
                         </Form.Group>
                         {authCodeFormVisible == true && (
                             <Form.Group controlId="formBasicConfirmToken">

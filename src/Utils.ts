@@ -1,17 +1,54 @@
-import bcrypt from 'bcryptjs';
+export const AuthService = {
+    getToken() {
+        return localStorage.getItem('token');
+    },
+
+    setToken(token: string) {
+        localStorage.setItem('token', token);
+    },
+
+    removeToken() {
+        localStorage.removeItem('token');
+    },
+
+    async isAuthenticated() {
+        const response = await requestAPI("/user", "GET", {})
+        if (response && response.ok)
+            return true;
+        return false;
+    },
+};
 
 // @ts-ignore
-export async function requestAPI(url: string, method: string, body: Object) {
-    try {
-        return await fetch(process.env.REACT_APP_AWS_API + url, {
-            method: method,
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(body),
-        });
-    } catch (error) {
-        ;
+export async function requestAPI(url: string, method: string, body: Object): Promise<Response> {
+    const address = process.env.REACT_APP_API + url;
+    const token = AuthService.getToken();
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
     }
+
+    const fetchOptions: RequestInit = {
+        method: method,
+        headers: headers,
+    };
+
+    if (method !== 'GET' && method !== 'HEAD') {
+        fetchOptions.body = JSON.stringify(body);
+    }
+
+    const response = await fetch(address, fetchOptions);
+
+    if (url === '/auth/login' && response.ok) {
+        const { access_token } = await response.json();
+        AuthService.setToken(access_token);
+    } else if (url === '/auth/logout' && response.ok) {
+        AuthService.removeToken();
+    }
+
+    return response;
 }
+
 
 export function verifyStrongPassword(password: string): boolean {
     // Check if password has at least 5 characters
@@ -37,25 +74,5 @@ export function verifyStrongPassword(password: string): boolean {
     return hasLowercase && hasUppercase && hasNumber;
 }
 
-export function bcryptPassword(password: string): Promise<string> {
-    const saltRounds = 5; // The cost factor controls how much time is needed to calculate a single BCrypt hash. Higher is slower and more secure.
 
-    return new Promise((resolve, reject) => {
-        bcrypt.genSalt(saltRounds, function(err, salt) {
-            if (err) {
-                console.error('Error generating salt:', err);
-                reject(err); // Reject the promise if there's an error generating the salt
-            } else {
-                bcrypt.hash(password, salt, function(err, hash) {
-                    if (err) {
-                        console.error('Error hashing password:', err);
-                        reject(err); // Reject the promise if there's an error hashing the password
-                    } else {
-                        console.log('Hashed password:', hash);
-                        resolve(hash); // Resolve the promise with the hashed password
-                    }
-                });
-            }
-        });
-    });
-}
+

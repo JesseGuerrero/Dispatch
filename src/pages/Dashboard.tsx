@@ -9,8 +9,6 @@ import EditEmail from "../components/EditEmail";
 import DeleteEmail from "../components/DeleteEmail";
 import Schedule from "../components/Schedule";
 import ScheduleEmail from "../components/ScheduleEmail";
-import Trigger from "../components/Trigger";
-import CreateTrigger from "../components/CreateTrigger";
 import Series from "../components/Series";
 import CreateSeries from "../components/CreateSeries";
 import Subscribers from "../components/Subscribers";
@@ -26,7 +24,7 @@ const Dashboard = () => {
     const menuOptions = {
         '': ['Overview', 'Broadcast', 'Calendar', 'Settings'],
         'Write Email': ['Create Email', 'Edit Email', 'Delete Email'],
-        'Manage Scheduler': ['Schedule', 'Schedule Email', 'Trigger', 'Create Trigger'],
+        'Manage Scheduler': ['Schedule', 'Schedule Email'],
         'Manage Series': ['Series', 'Create Series'],
         'Manage Newsletter': ['Subscribers', 'Add Subscriber', 'Edit Subscriber', 'Tags', 'Add Tags'],
         // ... add more categories and options here
@@ -36,7 +34,7 @@ const Dashboard = () => {
     const components: ComponentMapType = {
         "Overview": Overview, "Broadcast": Broadcast, "Calendar": Calendar, "Settings": Settings,
         "Create Email": CreateEmail, "Edit Email": EditEmail, "Delete Email": DeleteEmail,
-        "Schedule": Schedule, "Schedule Email": ScheduleEmail, "Trigger": Trigger, "Create Trigger": CreateTrigger,
+        "Schedule": Schedule, "Schedule Email": ScheduleEmail,
         "Series": Series, "Create Series": CreateSeries,
         "Subscribers": Subscribers, "Add Subscriber": AddSubscriber, "Edit Subscriber": EditSubscriber, "Tags": Tags, "Add Tags": AddTags,
     };
