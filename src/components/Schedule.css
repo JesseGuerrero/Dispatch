@@ -6,8 +6,11 @@
     --bs-pagination-hover-bg: var(--color-bg-secondary);
     --bs-pagination-active-bg: var(--color-today-bg);
     --bs-pagination-active-border-color: white;
+    --bs-pagination-active-color: #fff;
+    -bs-pagination-focus-bg: transparent;
+    --bs-pagination-focus-box-shadow: transparent;
 }
 
 #filter-table::placeholder {
-    color: var(--color-text-muted);
+color: var(--color-text-muted);
 }
