@@ -21,7 +21,7 @@ export const AuthService = {
 
 // @ts-ignore
 export async function requestAPI(url: string, method: string, body: Object): Promise<Response> {
-    const address = process.env.REACT_APP_API + url;
+    const address = import.meta.env.VITE_REACT_APP_API + url;
     const token = AuthService.getToken();
     const headers: Record<string, string> = { 'Content-Type': 'application/json' };
     if (token) {
@@ -33,19 +33,15 @@ export async function requestAPI(url: string, method: string, body: Object): Pro
         headers: headers,
     };
 
-    if (method !== 'GET' && method !== 'HEAD') {
+    if (method !== 'GET' && method !== 'HEAD')
         fetchOptions.body = JSON.stringify(body);
-    }
+
 
     const response = await fetch(address, fetchOptions);
-
     if (url === '/auth/login' && response.ok) {
         const { access_token } = await response.json();
         AuthService.setToken(access_token);
-    } else if (url === '/auth/logout' && response.ok) {
-        AuthService.removeToken();
     }
-
     return response;
 }
 
@@ -74,5 +70,9 @@ export function verifyStrongPassword(password: string): boolean {
     return hasLowercase && hasUppercase && hasNumber;
 }
 
-
+export function setFirstLetterUpper(str: string) {
+    return str.replace(/\w\S*/g, function(txt: string) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+}
 

@@ -22,21 +22,23 @@ const Dashboard = () => {
     const [contentComponent, setContentComponent] = useState<React.ReactNode>(null);
     // Example categories and options
     const menuOptions = {
-        '': ['Overview', 'Broadcast', 'Calendar', 'Settings'],
+        '': ['Broadcast'],
+        // '': ['Overview', 'Broadcast', 'Calendar', 'Settings'],
         'Write Email': ['Create Email', 'Edit Email', 'Delete Email'],
-        'Manage Scheduler': ['Schedule', 'Schedule Email'],
-        'Manage Series': ['Series', 'Create Series'],
-        'Manage Newsletter': ['Subscribers', 'Add Subscriber', 'Edit Subscriber', 'Tags', 'Add Tags'],
+        // 'Manage Scheduler': ['Schedule', 'Schedule Email'],
+        // 'Manage Series': ['Series', 'Create Series'],
+        'Manage Newsletter': ['Subscribers', 'Add Subscriber', 'Tags', 'Add Tags'],
         // ... add more categories and options here
     };
 
     type ComponentMapType = { [key: string]: ComponentType };
     const components: ComponentMapType = {
-        "Overview": Overview, "Broadcast": Broadcast, "Calendar": Calendar, "Settings": Settings,
+        // "Overview": Overview, "Broadcast": Broadcast, "Calendar": Calendar, "Settings": Settings,
+        "Broadcast": Broadcast,
         "Create Email": CreateEmail, "Edit Email": EditEmail, "Delete Email": DeleteEmail,
-        "Schedule": Schedule, "Schedule Email": ScheduleEmail,
-        "Series": Series, "Create Series": CreateSeries,
-        "Subscribers": Subscribers, "Add Subscriber": AddSubscriber, "Edit Subscriber": EditSubscriber, "Tags": Tags, "Add Tags": AddTags,
+        // "Schedule": Schedule, "Schedule Email": ScheduleEmail,
+        // "Series": Series, "Create Series": CreateSeries,
+        "Subscribers": Subscribers, "Add Subscriber": AddSubscriber, "Tags": Tags, "Add Tags": AddTags,
     };
     const componentMap: Record<string, React.ReactNode> = {};
     Object.values(menuOptions).flat().forEach(option => {

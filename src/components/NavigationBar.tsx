@@ -17,7 +17,6 @@ const NavigationBar = () => {
 
     const logout = async (e: React.MouseEvent) => {
         e.preventDefault();
-        await requestAPI('/delete-token', 'POST', {});
         AuthService.removeToken();
         setIsAuthenticated(false);
         navigate('/');
@@ -29,6 +28,14 @@ const NavigationBar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 <Nav>
+                    {isAuthenticated ? (
+                        <>
+                            <Nav.Link href="/">Balance: 10 Emails</Nav.Link>
+                        </>
+                    ) : (
+                        <>
+                        </>
+                    )}
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/about">About</Nav.Link>
                     {isAuthenticated ? (
