@@ -17,14 +17,17 @@ interface SubscriberTableProps {
     rows: any[];
     setEmail: React.Dispatch<React.SetStateAction<string>>;
     email: string;
+    setFirstName: React.Dispatch<React.SetStateAction<string>>;
+    firstName: string;
+    setTagName: React.Dispatch<React.SetStateAction<string>>;
+    tagName: string;
+    setIsSubscribed: React.Dispatch<React.SetStateAction<boolean>>;
+    isSubscribed: boolean;
     setMaxPage: React.Dispatch<React.SetStateAction<number>>;
     page: number;
 }
 
-const SubscriberTable: React.FC<SubscriberTableProps> = ({ setRows, rows, setEmail, email, setMaxPage, page }) => {
-    const [firstName, setFirstName] = useState<string>('');
-    const [tagName, setTagName] = useState<string>('');
-    const [isSubscribed, setIsSubscribed] = useState<string>('All');
+const SubscriberTable: React.FC<SubscriberTableProps> = ({ setRows, rows, setEmail, email, firstName, setFirstName, tagName, setTagName, isSubscribed, setIsSubscribed, setMaxPage, page }) => {
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
     const [update, setUpdate] = useState<UpdateState>({})
 
@@ -40,7 +43,7 @@ const SubscriberTable: React.FC<SubscriberTableProps> = ({ setRows, rows, setEma
         if (email) queryParams.push(`subEmail=${email.toLowerCase()}`);
         if (firstName) queryParams.push(`firstName=${firstName.toLowerCase()}`);
         if (tagName) queryParams.push(`tagName=${tagName.toLowerCase()}`);
-        queryParams.push(`isSubscribed=${isSubscribed.toLowerCase()}`);
+        queryParams.push(`isSubscribed=${isSubscribed}`);
         queryParams.push(`page=${page}`);
 
         const queryString = queryParams.join('&');

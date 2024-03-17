@@ -4,7 +4,7 @@ import './Dashboard.css';
 import Overview from "../components/Overview";
 import Broadcast from "../components/Broadcast";
 import Calendar from "../components/Calendar";
-import CreateEmail from "../components/CreateEmail";
+import CreateEmail from "../components/CreateEmailSimple";
 import EditEmail from "../components/EditEmail";
 import DeleteEmail from "../components/DeleteEmail";
 import Schedule from "../components/Schedule";
@@ -24,10 +24,12 @@ const Dashboard = () => {
     const menuOptions = {
         '': ['Broadcast'],
         // '': ['Overview', 'Broadcast', 'Calendar', 'Settings'],
-        'Write Email': ['Create Email', 'Edit Email', 'Delete Email'],
+        // 'Write Email': ['Create Email', 'Edit Email', 'Delete Email'],
+        'Write Email': ['Create Email', 'Edit Email'],
         // 'Manage Scheduler': ['Schedule', 'Schedule Email'],
         // 'Manage Series': ['Series', 'Create Series'],
-        'Manage Newsletter': ['Subscribers', 'Add Subscriber', 'Tags', 'Add Tags'],
+        // 'Manage Newsletter': ['Subscribers', 'Add Subscriber', 'Tags', 'Add Tag'],
+        'Manage Newsletter': ['Subscribers', 'Add Subscriber', 'Add Tag'],
         // ... add more categories and options here
     };
 
@@ -38,7 +40,7 @@ const Dashboard = () => {
         "Create Email": CreateEmail, "Edit Email": EditEmail, "Delete Email": DeleteEmail,
         // "Schedule": Schedule, "Schedule Email": ScheduleEmail,
         // "Series": Series, "Create Series": CreateSeries,
-        "Subscribers": Subscribers, "Add Subscriber": AddSubscriber, "Tags": Tags, "Add Tags": AddTags,
+        "Subscribers": Subscribers, "Add Subscriber": AddSubscriber, "Tags": Tags, "Add Tag": AddTags,
     };
     const componentMap: Record<string, React.ReactNode> = {};
     Object.values(menuOptions).flat().forEach(option => {

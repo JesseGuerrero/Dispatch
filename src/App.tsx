@@ -8,12 +8,14 @@ import NavigationBar from "./components/NavigationBar";
 import Dashboard from "./pages/Dashboard";
 import ChangePassword from "./pages/ChangePassword";
 import ProtectedRoute from './ProtectedRoute';
+import {useState} from "react";
 
 function App() {
+    const [balance, setBalance] = useState<number>(0)
     return (
         <Router>
             <div>
-                <NavigationBar />
+                <NavigationBar balance={balance} setBalance={setBalance}/>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />

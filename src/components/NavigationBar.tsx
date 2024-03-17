@@ -3,7 +3,12 @@ import { Navbar, Nav, Button } from 'react-bootstrap';
 import { AuthService, requestAPI } from '../Utils';
 import { useNavigate } from 'react-router-dom';
 
-const NavigationBar = () => {
+interface NavProps {
+    setBalance: React.Dispatch<React.SetStateAction<number>>;
+    balance: number;
+}
+
+const NavigationBar: React.FC<NavProps> = ({balance, setBalance}) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
     const navigate = useNavigate();
 
@@ -11,6 +16,11 @@ const NavigationBar = () => {
         const checkAuth = async () => {
             const authenticated = await AuthService.isAuthenticated();
             setIsAuthenticated(authenticated);
+            if(authenticated) {
+                const response = await requestAPI("/user", "GET", {})
+                const data = await response.json()
+                setBalance(data['balance'])
+            }
         };
         checkAuth();
     }, []);
@@ -30,7 +40,7 @@ const NavigationBar = () => {
                 <Nav>
                     {isAuthenticated ? (
                         <>
-                            <Nav.Link href="/">Balance: 10 Emails</Nav.Link>
+                            <Nav.Link href="/">Balance: {balance} Emails</Nav.Link>
                         </>
                     ) : (
                         <>
